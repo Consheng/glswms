@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">glswms</string>
+    <string name="action_settings"></string>
+    <string name="public_back">关闭</string>
+    <!-- 本地保存的文件名字 -->
+    <string name="saveOther">saveOther</string>
+    <!-- 保存操作员信息 -->
+    <string name="saveUser">saveUserInfo</string>
+    <!-- 保存服务器配置信息 -->
+    <string name="saveConfig">saveConfig</string>
+    <!-- 保存数据库系统设置信息 -->
+    <string name="saveSystemSet">saveSystemSet</string>
+    <!-- 保存业务默认仓库设置信息 -->
+    <string name="saveDefaultStock">saveDefaultStock</string>
+
+    <!-- 自定义listView -->
+    <string name="xrecyclerview_header_hint_normal">下拉刷新</string>
+    <string name="xlrecyclerview_header_hint_ready">释放立即刷新</string>
+    <string name="xrecyclerview_header_hint_loading">正在刷新...</string>
+    <string name="xrecyclerview_header_hint_refresh_success">刷新成功</string>
+    <string name="xrecyclerview_header_hint_refresh_failure">刷新失败</string>
+    <string name="refresh_done">刷新完成</string>
+    <string name="click_to_loadmore">点击加载更多数据</string>
+    <string name="xrecyclerview_header_last_time">最近更新：</string>
+    <string name="xrecyclerview_footer_loadmore">加载更多...</string>
+    <string name="xrecyclerview_footer_loading">正在加载...</string>
+    <string name="xrecyclerview_footer_hint_normal">加载更多</string>
+    <string name="xrecyclerview_footer_hint_ready">释放立即加载</string>
+    <string name="xrecyclerview_footer_never_hasdata">没有更多的数据了</string>
+    <string name="loading_done">加载完成</string>
+    <string name="not_updated_yet">暂未更新过</string>
+    <string name="updated_at">上次更新于%1$s前</string>
+    <string name="updated_just_now">刚刚更新</string>
+    <string name="time_error">时间有问题</string>
+    <string name="layout_loading_text">正在加载...</string>
+    <string name="load_fail_message">数据加载失败，请点击重试</string>
+
+    <!-- 蓝牙打印模块 -->
+    <string name="select_bluetooth_device">选择蓝牙设备</string>
+    <string name="scaning">扫描</string>
+    <string name="none_bluetooth_device_found">没有找到蓝牙设备</string>
+    <string name="none_paired">未配对</string>
+    <string name ="bluetooth_is_not_enabled">蓝牙没有开启</string>
+    <string name="str_enter_print_counts">请输入打印次数：</string>
+    <string name="str_choice_printer_command">请选择正确的打印机指令</string>
+    <string name="str_printer_conn_normal">打印机连接正常</string>
+    <string name="str_printer_out_of_paper">打印机缺纸</string>
+    <string name="str_printer_open_cover">打印机开盖</string>
+    <string name="str_printer_error">打印机出错</string>
+    <string name="str_state">状态：</string>
+    <string name="str_interface_undefine">接口：未设定</string>
+    <string name="str_select_printer_id">选中id为{0}的打印机</string>
+    <string name="bluetooth_device_list">蓝牙设备列表</string>
+    <string name="str_conn_state_disconnect">蓝牙连接状态：未连接×</string>
+    <string name="str_conn_state_connecting">蓝牙连接状态：连接中...</string>
+    <string name="str_connecting">连接中</string>
+    <string name="str_conn_state_connected">蓝牙连接状态：已连接√</string>
+    <string name="str_cann_printer">请先连接打印机</string>
+    <string name="str_conn_fail">连接失败！</string>
+    <string name="title_paired_devices">已配对</string>
+    <string name="title_other_devices">未配对</string>
+    <string name="scan">扫描</string>
+
+</resources>

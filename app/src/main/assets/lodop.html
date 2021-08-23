@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+<HTML>
+<HEAD>
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dpi" />
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<script src="http://192.168.3.213:8006/CLodopfuncs.js"></script>-->
+<script>
+    //这种方法仅适用于单个的script标签
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = myJs.getLodopAddress();
+    var head = document.getElementsByTagName("head")[0];
+    // 添加到head
+    head.appendChild(script);
+</script>
+
+
+<script>
+    // 调用打印服务器来打印
+    print = function(data){
+		//注册授权，避免打印出试用版的提示
+		LODOP.SET_LICENSES("广州信畅信息技术有限公司","591E4F8932E17DF067A1D1E7F683CA31","","");
+
+		var items = null;
+		if(data == undefined) {
+			var item = '';
+			for(var i=0;i<19;i++){
+				var orderNo = "XSDD20190" + i;
+				var mtlName = "五福金牛新360航空软包系列畅享凯迪拉克XT5酒红色脚垫";
+				var unitName = "套";
+				var fqty = i;
+				item += '{"orderNo":"' + orderNo + '","mtlName":"' + mtlName + '","unitName":"' + unitName + '","fqty":"' + fqty +  '"},';
+			}
+			items = '[' + item.substring(0,item.length - 1) + ']';
+
+			data = '{"boxCount":"' + "3" + '","date":"' + "2019-04-24" + '","boxNumber":"' + "PK201904240327" + '","custName":"' + "河南龚铁峰" + '","items":' + items + '}';
+		} else {
+            data = JSON.stringify(data)
+		}
+
+		var json = JSON.parse(data);
+        var boxCount = json.boxCount;
+        var date = json.date;
+        var boxNumber = json.boxNumber;
+        var custName = json.custName;
+        var itemJson = json.items;
+        var length = itemJson.length;//29 传入的items总分录数
+        var pageSize = 14;//14 打印一页的分录数
+
+        for(var count = 0; count < 2; count++){
+	        var printCount = 0;
+	        var sum = Math.ceil(length / pageSize);//3
+	        for(var n = 0; n < sum; n++){
+	        	//预览区域尺寸
+	            LODOP.PRINT_INITA(1, 1, "50cm", "30cm", "装箱清单打印");
+	        	//打印区域尺寸
+	            LODOP.SET_PRINT_PAGESIZE(0, "0", "0", "A6");
+
+	        	LODOP.ADD_PRINT_TEXT("3mm", "50mm", "35mm", "6mm", "装箱单");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "13");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+	            LODOP.ADD_PRINT_TEXT("3mm", "77mm", "10mm", "6mm", boxCount);//同一个客户今天开的第N个箱子
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "13");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            LODOP.ADD_PRINT_TEXT("9mm", "3mm", "15mm", "6mm", "日期");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+	            LODOP.ADD_PRINT_TEXT("9mm", "12mm", "25mm", "6mm", date);//装箱单生成日期
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            LODOP.ADD_PRINT_TEXT("9mm", "45mm", "15mm", "6mm", "单号");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+	            LODOP.ADD_PRINT_BARCODE("9mm", "55mm", "70mm", "8mm", "Code39", boxNumber);//装箱的箱号
+	            LODOP.SET_PRINT_STYLEA(0, "ShowBarText", 1);
+	            LODOP.SET_PRINT_STYLEA(0, "NotOnlyHighPrecision", 1);
+
+	            LODOP.ADD_PRINT_TEXT("17mm", "3mm", "15mm", "6mm", "客户");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+	            LODOP.ADD_PRINT_TEXT("17mm", "12mm", "100mm", "6mm", custName);//客户名称
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            LODOP.ADD_PRINT_TEXT("23mm", "0mm", "9mm", "6mm", "序号");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            LODOP.ADD_PRINT_TEXT("23mm", "7mm", "28mm", "6mm", "订单号");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            LODOP.ADD_PRINT_TEXT("23mm", "28mm", "87mm", "6mm", "名称");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            LODOP.ADD_PRINT_TEXT("23mm", "114mm", "9mm", "6mm", "单位");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            LODOP.ADD_PRINT_TEXT("23mm", "121mm", "9mm", "6mm", "数量");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	            var rowsCount = 0;
+	    		for(var i = 0; i < pageSize; i++){
+	    			var newItem = itemJson[printCount];
+	    			if(newItem == undefined) break;
+
+	    			var orderNo = newItem.orderNo;
+	    			var mtlName = newItem.mtlName;
+	    			var unitName = newItem.unitName;
+	    			var fqty = newItem.fqty;
+
+	    			var height = rowsCount * 4 + 29;
+	    			var h = height + "mm";
+
+	    			var rowSn = printCount + 1;
+	    			rowSn = rowSn.toString();
+	    			LODOP.ADD_PRINT_TEXT(h, "0mm", "9mm", "4mm", rowSn);
+	                LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	                LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	                LODOP.ADD_PRINT_TEXT(h, "7mm", "28mm", "4mm", orderNo);
+	                LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	                LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	                LODOP.ADD_PRINT_TEXT(h, "28mm", "87mm", "4mm", mtlName);
+	                LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	                LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	                LODOP.ADD_PRINT_TEXT(h, "114mm", "9mm", "4mm", unitName);
+	                LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	                LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	                LODOP.ADD_PRINT_TEXT(h, "121mm", "9mm", "4mm", fqty);
+	                LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	                LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+
+	                printCount++;
+	                rowsCount++;
+	    		}
+	    		var totalCount = rowsCount.toString();
+	    		var totalHeight = rowsCount * 4 + 34;
+	    		var totalH = totalHeight + "mm";
+	    		LODOP.ADD_PRINT_TEXT(totalH, "100mm", "10mm", "6mm", "合计");
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+	            LODOP.ADD_PRINT_TEXT(totalH, "108mm", "10mm", "6mm", totalCount);
+	            LODOP.SET_PRINT_STYLEA(0, "FontSize", "8");
+	            LODOP.SET_PRINT_STYLEA(0, "Bold", 1);
+	            //LODOP.PREVIEW();
+	            LODOP.PRINT();
+	        }
+        }
+	}
+
+
+</script>
+</HEAD>
+<BODY>
+    <div>
+        <input type="button" onclick="print()" value="lodop打印">
+    </div>
+</BODY>
+</HTML>

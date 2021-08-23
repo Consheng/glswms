@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/lin_title"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#6691D7">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="@style/btnClose"
+            android:text="退出" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="操作员：王小二"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14sp" />
+
+        <Button
+            android:id="@+id/btn_print"
+            android:layout_width="46dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/_4dp"
+            android:visibility="invisible"
+            android:background="@drawable/aa_ico5a_5b"
+            android:ems="2"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lin_title"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgView1"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/aa_ico1a_2" />
+
+            <TextView
+                android:id="@+id/tvMenu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgView1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="采购送货"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgView2"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/upload" />
+
+            <TextView
+                android:id="@+id/tvMenu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgView2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="待送货"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/imgView3"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/aa_ico1a_2" />
+
+            <TextView
+                android:id="@+id/tvMenu3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgView3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="外购入库"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

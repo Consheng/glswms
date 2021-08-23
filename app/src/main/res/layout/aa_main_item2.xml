@@ -1,0 +1,199 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/lin_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvImg1"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/upload" />
+
+            <TextView
+                android:id="@+id/tab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvImg1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="待上传"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tvImg2"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/aa_ico2a_1" />
+
+            <TextView
+                android:id="@+id/tab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvImg2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="半成品入库"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tvImg3"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/aa_ico2a_1" />
+
+            <TextView
+                android:id="@+id/tab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvImg3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="成品入库"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_tab2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/relative4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tvImg4"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ico_search2" />
+
+            <TextView
+                android:id="@+id/tab4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvImg4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="报工查询"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvImg5"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/aa_ico3a_7" />
+
+            <TextView
+                android:id="@+id/tab5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvImg5"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="报工审核"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvImg6"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/ico_search2" />
+
+            <TextView
+                android:id="@+id/tab6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvImg6"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="报工查询"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

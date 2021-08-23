@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_2dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_pdaNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PDA单号："
+        android:textColor="@color/c_666666"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_missionBillNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="任务单："
+        android:textColor="@color/c_666666"
+        android:textSize="12sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tv_fdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/tv_missionBillNo"
+        android:text="创建日期："
+        android:textColor="@color/c_666666"
+        android:textSize="12sp" />
+
+</RelativeLayout>

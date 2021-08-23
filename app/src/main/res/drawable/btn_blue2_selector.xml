@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- 这是按钮点击的状态背景 -->
+    <item android:drawable="@drawable/shape_blue_2a" android:state_pressed="false"/>
+    <item android:drawable="@drawable/shape_blue_2b" android:state_pressed="true"/>
+    <item android:drawable="@drawable/shape_blue_2b" android:state_focused="true"/>
+    <item android:drawable="@drawable/shape_blue_2a"/>
+
+</selector>

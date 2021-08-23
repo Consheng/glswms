@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html40/strict.dtd">
+<HTML>
+<HEAD>
+<meta name="viewport" content="width=device-width, target-densitydpi=device-dpi" />
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<script src="http://192.168.3.213:8006/CLodopfuncs.js"></script>-->
+<script>
+    //这种方法仅适用于单个的script标签
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = myJs.getLodopAddress();
+    var head = document.getElementsByTagName("head")[0];
+    // 添加到head
+    head.appendChild(script);
+</script>
+<script>
+    console.info("22222222222222222222222222");
+    print = function(data){
+
+        console.info(myJs.getTem());
+	}
+</script>
+</HEAD>
+<BODY>
+    <div>
+        <input type="button" onclick="print()" value="测试">
+    </div>
+</BODY>
+</HTML>

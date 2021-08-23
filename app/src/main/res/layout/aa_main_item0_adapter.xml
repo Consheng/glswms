@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_3dp">
+
+
+    <TextView
+        android:id="@+id/tv_row"
+        android:layout_width="38dp"
+        android:layout_height="wrap_content"
+        android:background="@color/c_666666"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_billNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="DD00001044"
+        android:textColor="@color/c_FF4400"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_missionType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="外购收料任务"
+        android:textColor="@color/c_515151"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_missionContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_row"
+        android:text="内容：我是你爸爸真伟大，养你这么大，你还不听话，一天到晚去玩耍，滚吧滚吧"
+        android:textColor="@color/c_666666"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLength="19"
+        android:text="2020-03-14"
+        android:layout_below="@+id/tv_missionContent"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_sourceBillNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tv_missionContent"
+        android:text="源单号：SEOUT019524"
+        android:textColor="@color/c_666666"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_outStockName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sourceBillNo"
+        android:text="调出仓库：成品仓"
+        android:textColor="@color/c_666666"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_deptName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sourceBillNo"
+        android:layout_alignParentRight="true"
+        android:text="部门：生产部"
+        android:textColor="@color/c_666666"
+        android:textSize="12sp" />
+
+
+</RelativeLayout>

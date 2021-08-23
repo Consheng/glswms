@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/tv_row"
+        android:layout_width="32dp"
+        android:layout_height="@dimen/_46dp"
+        android:background="@drawable/back_style_gray_line_right"
+        android:gravity="center"
+        android:text="行号"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_mtlNumber"
+        android:layout_width="78dp"
+        android:layout_height="@dimen/_46dp"
+        android:background="@drawable/back_style_gray_line_right"
+        android:gravity="center"
+        android:paddingLeft="@dimen/_2dp"
+        android:paddingRight="@dimen/_2dp"
+        android:text="物料代码"
+        android:textColor="#000000"
+        android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_mtlName"
+        android:layout_width="160dp"
+        android:layout_height="@dimen/_46dp"
+        android:background="@drawable/back_style_gray_line_right"
+        android:gravity="center|left"
+        android:paddingLeft="@dimen/_2dp"
+        android:paddingRight="@dimen/_2dp"
+        android:text="物料名称"
+        android:textColor="#000000"
+        android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_fLowLimit"
+        android:layout_width="58dp"
+        android:layout_height="@dimen/_46dp"
+        android:background="@drawable/back_style_gray_line_right"
+        android:gravity="center"
+        android:text="基本用量"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tv_fsecinv"
+        android:layout_width="68dp"
+        android:layout_height="@dimen/_46dp"
+        android:background="@drawable/back_style_gray_line_right"
+        android:gravity="center"
+        android:paddingLeft="@dimen/_2dp"
+        android:paddingRight="@dimen/_2dp"
+        android:text="即时库存"
+        android:textColor="#000000"
+        android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_fhighlimit"
+        android:layout_width="130dp"
+        android:layout_height="@dimen/_46dp"
+        android:gravity="center"
+        android:text="采购订单未入库数量"
+        android:textColor="#000000"
+        android:textSize="@dimen/_12sp" />
+
+</LinearLayout>

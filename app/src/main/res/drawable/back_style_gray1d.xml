@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 只显示上下横线的边框 -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape> <!-- 边框颜色 -->
+            <solid android:color="#EAEAEA" />
+        </shape>
+    </item>
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp">
+        <shape> <!-- 边框里面的颜色 -->
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+</layer-list>
+

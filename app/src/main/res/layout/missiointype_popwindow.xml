@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="@dimen/_1dp"
+        android:background="@drawable/btn_blue2_selector"
+        android:gravity="center"
+        android:text="锁库成品调拨任务"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="@dimen/_1dp"
+        android:background="@drawable/btn_blue2_selector"
+        android:gravity="center"
+        android:text="生产材料调拨任务"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1dp"
+        android:background="@color/white" />
+
+</LinearLayout>

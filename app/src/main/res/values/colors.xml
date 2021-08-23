@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- 所有标题用的颜色(红色) -->
+    <color name="public_blue">#6691D7</color>
+    <color name="ting_titleColor">#ffa07a</color>
+    <color name="gridViewItemColor">#534672</color>
+    <color name="white">#FFFFFF</color>
+    <color name="tinyGray">#F5F5F5</color>
+    <color name="deepRed">#F20000</color>
+    <!-- 淡蓝色 -->
+    <color name="dark_blue">#7a67ee</color>
+    <color name="c_9a67ee">#9a67ee</color>
+    <color name="tiny_blue">#B3D9FF</color>
+    <!-- ViewGroup 中  年，月，日按钮颜色 -->
+    <color name="dark_yellow">#cd8500</color>
+    <color name="c_6a5acd">#6a5acd</color>
+    <color name="red">#cd0000</color>
+    <color name="back">#fdf5e6</color>
+    <color name="darkblack">#666666</color>
+    <color name="black">#000000</color>
+    <color name="c_lalala">#1a1a1a</color>
+    <color name="check_color">#FF6347</color>
+    <color name="default_color">#F0F0F0</color>
+    <color name="c_eaeaea">#EAEAEA</color>
+    <color name="c_d8d8d8">#D8D8D8</color>
+    <color name="c_cccccc">#CCCCCC</color>
+    <color name="c_666666">#666666</color>
+    <color name="c_777777">#777777</color>
+    <color name="c_888888">#888888</color>
+    <color name="c_999999">#999999</color>
+    <color name="c_515151">#515151</color>
+    <color name="c_303f9f">#303f9f</color>
+    <color name="c_113992">#113992</color>
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="pink">#ffc0cb</color>
+    <color name="whitesmoke">#F5F5F5</color><!--烟白色 -->
+    <color name="gray">#808080</color><!--灰色 -->
+    <color name="dimgray">#696969</color><!--暗灰色 -->
+    <color name="black90">#383431</color><!--黑色 -->
+ 	<!-- 粉红色 -->
+    <color name="transparent">#00000000</color>
+    <color name="c_e0e0e0">#e0e0e0</color> 
+    <color name="holo_blue">#FF33E5B5</color>
+    <color name="thirty_transparent_black">#4d000000</color>
+    <color name="c_009900">#009900</color>
+    <color name="c_008800">#008800</color>
+    <color name="c_006600">#006600</color>
+    <color name="c_FF0000">#FF0000</color>
+    <color name="c_FF2200">#FF2200</color>
+    <color name="c_FF4400">#FF4400</color>
+    <color name="c_FF6600">#FF6600</color>
+    <color name="c_fffafa">#FFFAFA</color> 
+    <!-- 紫色 -->
+	<color name="purple">#A28FDB</color>
+	<color name="purple_key">#6A4BC5</color>
+
+    <color name="defaultColor">#11B1D5</color>
+    <color name="refresh_text">#A7A7A7</color>
+
+    <!-- 扫一扫用到的 -->
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="possible_result_points2">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+    <color name="result_text">#ffffffff</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+
+	
+</resources>

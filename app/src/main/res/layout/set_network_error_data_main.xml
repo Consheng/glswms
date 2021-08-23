@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#6691D7">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="@style/btnClose" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="网络异常数据查询"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="@dimen/_50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_blue2_selector"
+            android:text="刷新"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lin_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_42dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/lin_tab1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/viewRadio1"
+                android:layout_width="@dimen/_30dp"
+                android:layout_height="@dimen/_30dp"
+                android:background="@drawable/check_on" />
+
+            <TextView
+                android:id="@+id/tv_radioName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="表头"
+                android:textColor="@color/c_FF4400"
+                android:textSize="@dimen/_16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_tab2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/viewRadio2"
+                android:layout_width="@dimen/_30dp"
+                android:layout_height="@dimen/_30dp"
+                android:background="@drawable/check_off2" />
+
+            <TextView
+                android:id="@+id/tv_radioName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="添加明细"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_tab3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/viewRadio3"
+                android:layout_width="@dimen/_30dp"
+                android:layout_height="@dimen/_30dp"
+                android:background="@drawable/check_off2" />
+
+            <TextView
+                android:id="@+id/tv_radioName3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="表体"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_connState"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_2dp"
+        android:text="@string/str_conn_state_disconnect"
+        android:textColor="@color/c_666666"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+    <ykk.xc.com.glswms.util.MyViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

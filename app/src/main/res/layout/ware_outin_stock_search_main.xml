@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#6691D7">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="@style/btnClose" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="待上传列表"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="@dimen/_50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_blue2_selector"
+            android:text="查询"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="@dimen/_6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="4"
+            android:gravity="center"
+            android:text="单据类型"
+            android:textColor="#000000"
+            android:textSize="@dimen/_14sp" />
+
+        <TextView
+            android:id="@+id/tv_billType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:drawableRight="@drawable/xiala3"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/c_eaeaea" />
+
+    <ykk.xc.com.glswms.util.MyViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_batchUpload"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:background="@drawable/btn_blue2_selector"
+        android:gravity="center"
+        android:text="一键上传"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>
+

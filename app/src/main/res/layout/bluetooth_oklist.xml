@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#6691D7">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="@style/btnClose" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="请选择您的蓝牙设备"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_blue_selector"
+            android:text="查询"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_oklist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back_style_blue2"
+        android:gravity="center"
+        android:orientation="vertical"></LinearLayout>
+
+
+</LinearLayout>

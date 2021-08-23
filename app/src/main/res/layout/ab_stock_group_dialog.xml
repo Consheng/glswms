@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    android:minWidth="380dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_getFocus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:inputType="none" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#6691D7">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="@style/btnClose" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="选择仓库信息"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_blue2_selector"
+            android:ems="2"
+            android:text="打印\n条码"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6dp"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/cb_stockAutoConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sp"
+            android:textColor="@color/c_FF6600"
+            android:text="到最末级自动返回" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_42dp"
+        android:layout_marginBottom="@dimen/_6dp"
+        android:layout_marginLeft="@dimen/_3dp"
+        android:layout_marginRight="@dimen/_3dp"
+        android:layout_marginTop="@dimen/_12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center"
+            android:text="仓库"
+            android:textColor="#000000"
+            android:textSize="@dimen/_14sp" />
+
+        <LinearLayout
+            android:id="@+id/lin_focusStock"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_stockScan"
+                android:layout_width="@dimen/_42dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_scan_selector" />
+
+            <EditText
+                android:id="@+id/et_stockCode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:hint="扫描仓库条码"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sp" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_2dp"
+                android:layout_marginTop="@dimen/_2dp"
+                android:background="@color/c_eaeaea" />
+
+            <TextView
+                android:id="@+id/tv_stockName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/c_6a5acd"
+                android:textSize="@dimen/_12sp" />
+
+            <Button
+                android:id="@+id/btn_stockSel"
+                android:layout_width="@dimen/_42dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_1dp"
+                android:background="@drawable/btn_blue_selector"
+                android:text="选择"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_42dp"
+        android:layout_marginBottom="@dimen/_6dp"
+        android:layout_marginLeft="@dimen/_3dp"
+        android:layout_marginRight="@dimen/_3dp"
+        android:layout_marginTop="@dimen/_6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center"
+            android:text="库位"
+            android:textColor="#000000"
+            android:textSize="@dimen/_14sp" />
+
+        <LinearLayout
+            android:id="@+id/lin_focusStockPos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_gray3"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_stockPlaceScan"
+                android:layout_width="@dimen/_42dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_scan_selector"
+                android:enabled="false" />
+
+            <EditText
+                android:id="@+id/et_stockPlaceCode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:enabled="false"
+                android:hint="扫描库位条码"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_2dp"
+                android:layout_marginTop="@dimen/_2dp"
+                android:background="@color/c_eaeaea" />
+
+            <TextView
+                android:id="@+id/tv_stockPlaceName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/c_6a5acd"
+                android:textSize="@dimen/_12sp" />
+
+            <Button
+                android:id="@+id/btn_stockPlaceSel"
+                android:layout_width="@dimen/_42dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_1dp"
+                android:background="@drawable/btn_blue_selector"
+                android:enabled="false"
+                android:text="选择"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_42dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_6dp"
+        android:background="@drawable/btn_blue2_selector"
+        android:text="确认"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:gravity="center"
+        android:minHeight="@dimen/_38dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="2"
+            android:gravity="center"
+            android:text="任务类型"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sp" />
+
+        <TextView
+            android:id="@+id/tv_missionType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:drawableRight="@drawable/xiala3"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_6dp"
+        android:layout_marginLeft="@dimen/_6dp"
+        android:layout_marginRight="@dimen/_6dp"
+        android:gravity="center"
+        android:minHeight="@dimen/_38dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="2"
+            android:gravity="center"
+            android:text="日期"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:drawableRight="@drawable/xiala3"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_3dp"
+            android:ems="2"
+            android:gravity="center"
+            android:text="单号"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sp" />
+
+        <EditText
+            android:id="@+id/et_purNo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:inputType="none"
+            android:padding="@dimen/_2dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_3dp"
+        android:background="@color/c_d8d8d8" />
+
+    <ykk.xc.com.glswms.util.xrecyclerview.XRecyclerView
+        android:id="@+id/xRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never" />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_38dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_blue2_selector"
+        android:ems="2"
+        android:text="确认"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/_16sp"
+        android:visibility="gone" />
+
+
+</LinearLayout>
+

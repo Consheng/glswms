@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:background="@color/white"
+    android:minWidth="380dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#6691D7">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="@style/btnClose" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="选择发货方式"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_blue2_selector"
+            android:ems="2"
+            android:text="打印\n条码"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="6dp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:hint="请输入查询的关键字"
+            android:inputType="none"
+            android:maxLength="30"
+            android:paddingLeft="3dp"
+            android:textColor="#000000"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="108dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_blue_selector"
+            android:text="查询"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:background="#D8D8D8">
+
+        <TextView
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="行号"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="代码"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="名称"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:scrollbars="none" />
+
+</LinearLayout>

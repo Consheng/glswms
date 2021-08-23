@@ -1,0 +1,109 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/lin_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imgView1"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/aa_ico6a_1" />
+
+
+            <TextView
+                android:id="@+id/tvMenu1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgView1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="订单报表"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/imgView2"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/aa_ico4a_8" />
+
+            <TextView
+                android:id="@+id/tvMenu2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgView2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="电商审核"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/imgView3"
+                android:layout_width="@dimen/_60dp"
+                android:layout_height="@dimen/_60dp"
+                android:layout_centerHorizontal="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/aa_ico4a_2" />
+
+            <TextView
+                android:id="@+id/tvMenu3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgView3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3dp"
+                android:text="调拨"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

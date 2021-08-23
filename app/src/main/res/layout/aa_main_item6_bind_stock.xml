@@ -1,0 +1,390 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="#6691D7">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="@style/btnClose" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="绑定默认仓库"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_blue2_selector"
+            android:ems="2"
+            android:text="保存"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/_16sp"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_6dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="4"
+                    android:gravity="center"
+                    android:text="采购入库"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_purStock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择默认仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="4"
+                    android:gravity="center"
+                    android:text="采购退料"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_purStock_red"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择默认仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="4"
+                    android:gravity="center"
+                    android:text="生产入库"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_prodStock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择默认仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="4"
+                    android:gravity="center"
+                    android:text="销售出库"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_salOutStock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择默认仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="4"
+                    android:gravity="center"
+                    android:text="销售退货"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_salOutStock_red"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择默认仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="4"
+                    android:gravity="center"
+                    android:text="其它入库"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_otherInStock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择默认仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="4"
+                    android:gravity="center"
+                    android:text="其它出库"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_otherOutStock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择默认仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:layout_marginTop="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:text="调拨单"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:id="@+id/tv_zydbOutStock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择调出仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="1"
+                    android:gravity="center"
+                    android:text="调出"
+                    android:textColor="@color/c_666666"
+                    android:textSize="@dimen/_12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_42dp"
+                android:layout_marginLeft="@dimen/_6dp"
+                android:layout_marginRight="@dimen/_6dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:text="自由调拨"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sp"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tv_zydbInStock"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back_style_blue"
+                    android:drawableRight="@drawable/xiala3"
+                    android:gravity="center"
+                    android:hint="请选择调入仓库"
+                    android:textColor="@color/c_6a5acd"
+                    android:textSize="@dimen/_14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ems="1"
+                    android:gravity="center"
+                    android:text="调入"
+                    android:textColor="@color/c_666666"
+                    android:textSize="@dimen/_12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2dp"
+        android:background="@color/c_d8d8d8" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_38dp"
+        android:layout_marginBottom="@dimen/_6dp"
+        android:layout_marginTop="@dimen/_6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_clear"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_purple_selector"
+            android:gravity="center"
+            android:text="清空绑定数据"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

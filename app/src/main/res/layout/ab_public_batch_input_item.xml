@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/tv_row"
+        android:layout_width="@dimen/_42dp"
+        android:layout_height="@dimen/_38dp"
+        android:gravity="center"
+        android:text="行号"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sp" />
+
+    <TextView
+        android:id="@+id/tv_batchCode"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_38dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="批次号"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sp" />
+
+    <TextView
+        android:id="@+id/tv_fqty"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_38dp"
+        android:layout_weight="0.8"
+        android:gravity="center"
+        android:text="数量"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sp" />
+
+    <TextView
+        android:id="@+id/tv_del"
+        android:layout_width="@dimen/_38dp"
+        android:layout_height="@dimen/_38dp"
+        android:background="@drawable/ico_del2"
+        android:gravity="center" />
+
+</LinearLayout>

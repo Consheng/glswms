@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/public_blue"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginLeft="@dimen/_36dp"
+        android:layout_marginRight="@dimen/_36dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center"
+            android:text="账号"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_userName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:inputType="none"
+            android:paddingLeft="@dimen/_6dp"
+            android:singleLine="true"
+            android:textSize="@dimen/_16sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginLeft="@dimen/_36dp"
+        android:layout_marginRight="@dimen/_36dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center"
+            android:text="密码"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_pwd"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:inputType="textPassword"
+            android:paddingLeft="@dimen/_6dp"
+            android:singleLine="true"
+            android:textSize="@dimen/_16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_46dp"
+        android:layout_marginTop="@dimen/_50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_set"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_80dp"
+            android:background="@drawable/btn_gray1_selector"
+            android:gravity="center"
+            android:text="服务器设置"
+            android:textColor="#222222"
+            android:textSize="@dimen/_14sp" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/_10dp"
+            android:layout_marginRight="@dimen/_46dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_gray1_selector"
+            android:text="登录"
+            android:textSize="@dimen/_16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

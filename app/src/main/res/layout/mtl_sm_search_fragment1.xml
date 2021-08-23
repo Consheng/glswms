@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_getFocus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:inputType="none" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="@dimen/_6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center"
+            android:text="条码"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/lin_focus1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_gray4"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:hint="物料扫码区"
+                android:inputType="none"
+                android:paddingLeft="@dimen/_2dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sp" />
+
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@drawable/btn_scan_selector" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10dp"
+        android:background="@color/c_eaeaea" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lin_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_mtlName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="物料新名称："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_oldMtlName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="物料旧名称："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_suitVehicleType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="适应车型："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_functionDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="功能："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_fsecinv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="安全库存："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="----------电商账号信息----------"
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_DSInvQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="即时库存："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="----------生产账号信息----------"
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="即时库存："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_SCInvQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_50dp"
+                android:text="忠诚卫士仓 --- 10086"
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_icmoQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="排产数量："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+            <TextView
+                android:id="@+id/tv_onPassageQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="在途数量："
+                android:textColor="@color/c_666666"
+                android:textSize="@dimen/_14sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

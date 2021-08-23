@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_getFocus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:inputType="none" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_42dp"
+        android:layout_marginLeft="@dimen/_6dp"
+        android:layout_marginRight="@dimen/_6dp"
+        android:layout_marginTop="@dimen/_6dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center"
+            android:text="位置"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/lin_focusPosition"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_positionScan"
+                android:layout_width="@dimen/_42dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_scan_selector" />
+
+            <EditText
+                android:id="@+id/et_positionCode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:hint="扫描位置条码"
+                android:inputType="none"
+                android:paddingLeft="@dimen/_2dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sp" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_2dp"
+                android:layout_marginTop="@dimen/_2dp"
+                android:background="@color/c_eaeaea" />
+
+            <TextView
+                android:id="@+id/tv_positionName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/c_6a5acd"
+                android:textSize="@dimen/_12sp" />
+
+            <Button
+                android:id="@+id/btn_positionSel"
+                android:layout_width="@dimen/_42dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_1dp"
+                android:background="@drawable/btn_blue_selector"
+                android:text="选择"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_42dp"
+        android:layout_marginBottom="@dimen/_6dp"
+        android:layout_marginLeft="@dimen/_6dp"
+        android:layout_marginRight="@dimen/_6dp"
+        android:layout_marginTop="@dimen/_3dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ems="2"
+            android:gravity="center"
+            android:text="物料"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/lin_focusMtl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/back_style_blue"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="@dimen/_42dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_scan_selector" />
+
+            <EditText
+                android:id="@+id/et_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:hint="扫描物料条码"
+                android:inputType="none"
+                android:paddingLeft="@dimen/_2dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_deptName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/c_FF4400"
+        android:gravity="center"
+        android:textSize="@dimen/_14sp"
+        android:text="部门：" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/c_d8d8d8" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:scrollbars="none" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_25dp"
+        android:background="@drawable/back_style_blue5"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="要扫描："
+            android:textColor="@color/c_515151"
+            android:textSize="@dimen/_12sp" />
+
+        <TextView
+            android:id="@+id/tv_needNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="已扫描："
+            android:textColor="@color/c_515151"
+            android:textSize="@dimen/_12sp" />
+
+        <TextView
+            android:id="@+id/tv_finishNum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textColor="@color/c_009900"
+            android:textSize="@dimen/_14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_38dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_clone"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_gray2_selector"
+            android:gravity="center"
+            android:text="重置"
+            android:textColor="@color/c_515151"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="2"
+            android:background="@drawable/btn_blue2_selector"
+            android:gravity="center"
+            android:text="保存"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="2"
+            android:background="@drawable/btn_purple2_selector"
+            android:gravity="center"
+            android:text="上传"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>
