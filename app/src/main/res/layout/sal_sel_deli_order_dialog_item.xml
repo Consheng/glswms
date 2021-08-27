@@ -11,8 +11,8 @@
         android:id="@+id/tv_mtlName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/_38dp"
         android:layout_marginRight="@dimen/_38dp"
+        android:minHeight="@dimen/_38dp"
         android:textColor="@color/c_FF4400"
         android:textSize="@dimen/_14sp" />
 
@@ -37,32 +37,51 @@
         android:textSize="@dimen/_12sp" />
 
     <TextView
-        android:id="@+id/tv_ptQty"
+        android:id="@+id/tv_fmodel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_mtlNumber"
-        android:text="配套数："
+        android:text="规格型号："
         android:textColor="@color/c_666666"
         android:textSize="@dimen/_12sp" />
 
     <TextView
-        android:id="@+id/tv_wptQty"
+        android:id="@+id/tv_sourceNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mtlNumber"
-        android:layout_centerHorizontal="true"
-        android:text="未配数："
+        android:layout_below="@+id/tv_fmodel"
+        android:text="发货单："
         android:textColor="@color/c_666666"
         android:textSize="@dimen/_12sp" />
 
     <TextView
-        android:id="@+id/tv_smQty"
+        android:id="@+id/tv_orderNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_fmodel"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_mtlNumber"
-        android:text="扫码数："
+        android:text="销售订单："
         android:textColor="@color/c_666666"
         android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sourceNo"
+        android:text="数量："
+        android:textColor="@color/c_666666"
+        android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_custName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_sourceNo"
+        android:layout_centerInParent="true"
+        android:text="客户："
+        android:textColor="@color/c_666666"
+        android:textSize="@dimen/_12sp" />
+
 
 </RelativeLayout>

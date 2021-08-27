@@ -6,17 +6,16 @@ import android.view.View
 import android.widget.TextView
 import ykk.xc.com.glswms.R
 import ykk.xc.com.glswms.bean.ICStockBillEntry_App
-import ykk.xc.com.glswms.comm.Comm
 import ykk.xc.com.glswms.util.basehelper.BaseArrayRecyclerAdapter
 import ykk.xc.com.glswms.util.basehelper.BaseRecyclerAdapter
 import java.text.DecimalFormat
 
-class Sal_OutStock_SaoMa_Adapter(private val context: Activity, datas: List<ICStockBillEntry_App>) : BaseArrayRecyclerAdapter<ICStockBillEntry_App>(datas) {
+class Sal_OutStock_Scan_Adapter(private val context: Activity, datas: List<ICStockBillEntry_App>) : BaseArrayRecyclerAdapter<ICStockBillEntry_App>(datas) {
     private val df = DecimalFormat("#.######")
     private var callBack: MyCallBack? = null
 
     override fun bindView(viewtype: Int): Int {
-        return R.layout.sal_out_stock_saoma_item
+        return R.layout.sal_out_stock_scan_item
     }
 
     override fun onBindHoder(holder: BaseRecyclerAdapter.RecyclerHolder, entity: ICStockBillEntry_App, pos: Int) {

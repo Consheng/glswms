@@ -1,5 +1,6 @@
-package ykk.xc.com.glswms.produce
+package ykk.xc.com.glswms.sales
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -10,49 +11,46 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import butterknife.OnClick
 import com.huawei.hms.hmsscankit.ScanUtil
 import com.huawei.hms.ml.scan.HmsScan
 import com.huawei.hms.ml.scan.HmsScanAnalyzerOptions
-import kotlinx.android.synthetic.main.prod_in_stock_saoma.*
+import kotlinx.android.synthetic.main.sal_out_stock_saoma_fragment1.*
 import okhttp3.*
 import ykk.xc.com.glswms.R
-import ykk.xc.com.glswms.basics.Stock_DialogActivity
 import ykk.xc.com.glswms.basics.Stock_GroupDialogActivity
 import ykk.xc.com.glswms.bean.ICStockBillEntryBarcode_App
 import ykk.xc.com.glswms.bean.ICStockBillEntry_App
 import ykk.xc.com.glswms.bean.ICStockBill_App
 import ykk.xc.com.glswms.bean.User
 import ykk.xc.com.glswms.bean.k3Bean.BomChild_App
-import ykk.xc.com.glswms.bean.k3Bean.ProdOrder_App
+import ykk.xc.com.glswms.bean.k3Bean.SeOrderEntry_App
 import ykk.xc.com.glswms.bean.k3Bean.StockPlace_App
 import ykk.xc.com.glswms.bean.k3Bean.Stock_App
-import ykk.xc.com.glswms.comm.BaseDialogActivity
 import ykk.xc.com.glswms.comm.BaseFragment
-import ykk.xc.com.glswms.comm.BaseFragment.CAMERA_SCAN
 import ykk.xc.com.glswms.comm.Comm
-import ykk.xc.com.glswms.produce.adapter.Prod_InStock_SaoMa_Adapter
-import ykk.xc.com.glswms.util.BigdecimalUtil
+import ykk.xc.com.glswms.sales.adapter.Sal_OutStock_SaoMa_Fragment1Adapter
 import ykk.xc.com.glswms.util.JsonUtil
 import ykk.xc.com.glswms.util.LogUtil
 import ykk.xc.com.glswms.util.basehelper.BaseRecyclerAdapter
 import java.io.IOException
 import java.lang.ref.WeakReference
-import java.text.DecimalFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
- *  成品扫码入库（扫码）
+ * 日期：2021-08-23 17:28
+ * 描述：销售订单出库
+ * 作者：ykk
  */
-class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
+class Sal_OutStock_SaoMaFragment1 : BaseFragment() {
 
     companion object {
         private val SEL_POSITION = 61
-        private val SEL_PROD = 62
-        private val SEL_STOCK = 63
+        private val SEL_ORDER = 64
         private val SUCC1 = 200
         private val UNSUCC1 = 500
         private val SAVE = 202
@@ -63,28 +61,26 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         private val RESULT_NUM = 3
         private val WRITE_CODE = 4
     }
-
     private val context = this
+    private var mContext: Activity? = null
+    private var parent: Sal_OutStock_SaoMaMainActivity? = null
     private val checkDatas = ArrayList<ICStockBillEntry_App>()
-    private var mAdapter: Prod_InStock_SaoMa_Adapter? = null
+    private var mAdapter: Sal_OutStock_SaoMa_Fragment1Adapter? = null
     private var okHttpClient: OkHttpClient? = null
     private var isTextChange: Boolean = false // 是否进入TextChange事件
     private var timesTamp: String? = null // 时间戳
     private var user: User? = null
     private var stock: Stock_App? = null
     private var stockPlace: StockPlace_App? = null
-    private var dcllStock: Stock_App? = null    // 倒冲仓库
     private var smqFlag = '2' // 扫描类型1：位置扫描，2：物料扫描
     private var curPos: Int = -1 // 当前行
     private var icstockBillEntry = ICStockBillEntry_App() // 记录成品的行信息
-    private var listBomChild: List<BomChild_App>? = null // 记录Bom扫码返回的信息
-    private val df = DecimalFormat("#.######")
 
     // 消息处理
     private val mHandler = MyHandler(this)
 
-    private class MyHandler(activity: Prod_InStock_SaoMaActivity) : Handler() {
-        private val mActivity: WeakReference<Prod_InStock_SaoMaActivity>
+    private class MyHandler(activity: Sal_OutStock_SaoMaFragment1) : Handler() {
+        private val mActivity: WeakReference<Sal_OutStock_SaoMaFragment1>
 
         init {
             mActivity = WeakReference(activity)
@@ -108,18 +104,20 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                                 m.getStockGroup(msgObj)
                             }
                             '2' -> { // 物料
-                                val list = JsonUtil.strToList(msgObj, BomChild_App::class.java)
-                                m.listBomChild = list
-                                if (m.checkDatas.size == 0) { // 匹配父项物料信息
-                                    // 打开生产订单列表供选择
-                                    val bundle = Bundle()
-                                    bundle.putInt("fitemId", list[0].bom.fitemId)
-                                    bundle.putBoolean("returnMinOrder", true) // 是否指定订单出库
-                                    m.showForResult(Prod_Sel_List_Dialog::class.java, SEL_PROD, bundle)
-
-                                } else { // 匹配子项物料信息
-                                    m.getMaterial(list[0])
+                                val strFitemId = JsonUtil.strToString(msgObj)
+                                val listDetailId = ArrayList<Int>()
+                                m.checkDatas.forEach {
+                                    listDetailId.add(it.fdetailId)
                                 }
+                                var finterId = if (m.checkDatas.size > 0) m.checkDatas[0].fsourceInterId else 0
+                                // 打开销售订单列表供选择
+                                val bundle = Bundle()
+                                bundle.putString("strFitemId", strFitemId)
+                                bundle.putInt("", finterId)
+//                                bundle.putInt("fcustId", if(m.checkDatas.size > 0) m.checkDatas[0].icstockBill.fcustId else 0)
+//                                bundle.putSerializable("listDetailId", listDetailId) // 为了扫描一次就加一次数量，就把该条件去掉
+                                bundle.putBoolean("returnMinOrder", if (m.cb_returnMinOrder.isChecked) false else true) // 是否指定订单出库
+                                m.showForResult(Sal_Sel_SalOrder_Dialog::class.java, SEL_ORDER, bundle)
                             }
                         }
                     }
@@ -130,7 +128,7 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                         }
                         errMsg = JsonUtil.strToString(msgObj)
                         if (m.isNULLS(errMsg).length == 0) errMsg = "很抱歉，没有找到数据！"
-                        Comm.showWarnDialog(m.context, errMsg)
+                        Comm.showWarnDialog(m.mContext, errMsg)
                     }
                     SAVE -> { // 保存成功 进入
                         m.toasts("保存成功✔")
@@ -139,7 +137,7 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                     UNSAVE -> { // 保存失败
                         errMsg = JsonUtil.strToString(msgObj)
                         if (m.isNULLS(errMsg).length == 0) errMsg = "保存失败！"
-                        Comm.showWarnDialog(m.context, errMsg)
+                        Comm.showWarnDialog(m.mContext, errMsg)
                     }
                     SETFOCUS -> { // 当弹出其他窗口会抢夺焦点，需要跳转下，才能正常得到值
                         m.setFocusable(m.et_getFocus)
@@ -157,11 +155,21 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         }
     }
 
-    override fun setLayoutResID(): Int {
-        return R.layout.prod_in_stock_saoma
+    override fun setLayoutResID(inflater: LayoutInflater, container: ViewGroup): View {
+        return inflater.inflate(R.layout.sal_out_stock_saoma_fragment1, container, false)
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            mHandler.sendEmptyMessageDelayed(SETFOCUS, 200)
+        }
     }
 
     override fun initView() {
+        mContext = getActivity()
+        parent = mContext as Sal_OutStock_SaoMaMainActivity
+
         if (okHttpClient == null) {
             okHttpClient = OkHttpClient.Builder()
                     //                .connectTimeout(10, TimeUnit.SECONDS) // 设置连接超时时间（默认为10秒）
@@ -170,12 +178,20 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                     .build()
         }
 
-        recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        mAdapter = Prod_InStock_SaoMa_Adapter(context, checkDatas)
+        recyclerView.addItemDecoration(DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL))
+        recyclerView.layoutManager = LinearLayoutManager(mContext)
+        mAdapter = Sal_OutStock_SaoMa_Fragment1Adapter(mContext!!, checkDatas)
         recyclerView.adapter = mAdapter
         // 设值listview空间失去焦点
         recyclerView.isFocusable = false
+
+        // 行事件
+        mAdapter!!.setCallBack(object : Sal_OutStock_SaoMa_Fragment1Adapter.MyCallBack {
+            override fun onDelete(entity: ICStockBillEntry_App, position: Int) {
+                checkDatas.removeAt(position)
+                mAdapter!!.notifyDataSetChanged()
+            }
+        })
 
         mAdapter!!.onItemClickListener = BaseRecyclerAdapter.OnItemClickListener { adapter, holder, view, pos ->
             curPos = pos
@@ -186,9 +202,8 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
     override fun initData() {
         getUserInfo()
         timesTamp = user!!.getId().toString() + "-" + Comm.randomUUID()
-        hideSoftInputMode(et_positionCode)
-        hideSoftInputMode(et_code)
-        mHandler.sendEmptyMessageDelayed(SETFOCUS, 200)
+        hideSoftInputMode(mContext, et_positionCode)
+        hideSoftInputMode(mContext, et_code)
 
         // 显示本地默认仓库
         showLocalStockGroup()
@@ -201,38 +216,19 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         val saveDefaultStock = getResStr(R.string.saveDefaultStock)
         val spfStock = spf(saveDefaultStock)
         // 显示调入仓库---------------------
-        if (spfStock.contains("BIND_PROD_STOCK")) {
-            stock = showObjectByXml(Stock_App::class.java, "BIND_PROD_STOCK", saveDefaultStock)
+        if (spfStock.contains("BIND_SAL_OUT_STOCK")) {
+            stock = showObjectByXml(Stock_App::class.java, "BIND_SAL_OUT_STOCK", saveDefaultStock)
         }
-        if (spfStock.contains("BIND_PROD_STOCKPOS")) {
-            stockPlace = showObjectByXml(StockPlace_App::class.java, "BIND_PROD_STOCKPOS", saveDefaultStock)
+        if (spfStock.contains("BIND_SAL_OUT_STOCKPOS")) {
+            stockPlace = showObjectByXml(StockPlace_App::class.java, "BIND_SAL_OUT_STOCKPOS", saveDefaultStock)
         }
         getStockGroup(null)
     }
 
     // 监听事件
-    @OnClick(R.id.btn_close, R.id.btn_positionSel, R.id.btn_positionScan, R.id.btn_scan, R.id.tv_positionName, R.id.tv_icItemName, R.id.tv_dcllStockSel,  R.id.btn_save, R.id.btn_clone)
+    @OnClick(R.id.btn_positionSel, R.id.btn_positionScan, R.id.btn_scan, R.id.tv_positionName, R.id.tv_icItemName, R.id.btn_save, R.id.btn_clone)
     fun onViewClicked(view: View) {
         when (view.id) {
-            R.id.btn_close -> {
-                if (checkDatas.size > 0) {
-                    val build = AlertDialog.Builder(context)
-                    build.setIcon(R.drawable.caution)
-                    build.setTitle("系统提示")
-                    build.setMessage("您有未保存的数据，继续关闭吗？")
-                    build.setPositiveButton("是") { dialog, which ->
-                        closeHandler(mHandler)
-                        context.finish()
-                    }
-                    build.setNegativeButton("否", null)
-                    build.setCancelable(false)
-                    build.show()
-
-                } else {
-                    closeHandler(mHandler)
-                    context.finish()
-                }
-            }
             R.id.btn_positionSel -> { // 选择仓库
                 smqFlag = '1'
                 val bundle = Bundle()
@@ -242,11 +238,11 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
             }
             R.id.btn_positionScan -> { // 调用摄像头扫描（位置）
                 smqFlag = '1'
-                ScanUtil.startScan(context, CAMERA_SCAN, HmsScanAnalyzerOptions.Creator().setHmsScanTypes(HmsScan.ALL_SCAN_TYPE).create());
+                ScanUtil.startScan(mContext, CAMERA_SCAN, HmsScanAnalyzerOptions.Creator().setHmsScanTypes(HmsScan.ALL_SCAN_TYPE).create())
             }
             R.id.btn_scan -> { // 调用摄像头扫描（物料）
                 smqFlag = '2'
-                ScanUtil.startScan(context, CAMERA_SCAN, HmsScanAnalyzerOptions.Creator().setHmsScanTypes(HmsScan.ALL_SCAN_TYPE).create());
+                ScanUtil.startScan(mContext, CAMERA_SCAN, HmsScanAnalyzerOptions.Creator().setHmsScanTypes(HmsScan.ALL_SCAN_TYPE).create())
             }
             R.id.tv_positionName -> { // 位置点击
                 smqFlag = '1'
@@ -256,16 +252,13 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                 smqFlag = '2'
                 mHandler.sendEmptyMessageDelayed(SETFOCUS, 200)
             }
-            R.id.tv_dcllStockSel -> { // 选择倒冲仓库
-                showForResult(Stock_DialogActivity::class.java, SEL_STOCK, null)
-            }
             R.id.btn_save -> { // 保存
                 if (!checkSave()) return
                 run_save()
             }
             R.id.btn_clone -> { // 重置
                 if (checkDatas.size > 0) {
-                    val build = AlertDialog.Builder(context)
+                    val build = AlertDialog.Builder(mContext)
                     build.setIcon(R.drawable.caution)
                     build.setTitle("系统提示")
                     build.setMessage("您有未保存的数据，继续重置吗？")
@@ -358,42 +351,26 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
      */
     fun checkSave(): Boolean {
         if (checkDatas.size == 0) {
-            Comm.showWarnDialog(context, "请扫码（条码）！")
+            Comm.showWarnDialog(mContext, "请扫描（条码）！")
             return false
         }
-        var isSave = false // 是否可以保存
         checkDatas.forEachIndexed { index, it ->
             if (it.fdcStockId == 0 || stock == null) {
-                Comm.showWarnDialog(context, "请选择（位置）！")
+                Comm.showWarnDialog(mContext, "请选择（位置）！")
                 return false
             }
-            if ( (it.fqty+it.wptQty) > 0.0) {
-                isSave = true
-            }
-            /*if (it.fqty == 0.0) {
-                Comm.showWarnDialog(context, "第" + (index + 1) + "行，请输入（扫码数）！")
+            if (it.fqty == 0.0) {
+                Comm.showWarnDialog(mContext, "第" + (index + 1) + "行，请输入（扫码数）！")
                 return false
-            }*/
+            }
 //            if (it.fqty < it.fsourceQty) {
 //                Comm.showWarnDialog(context, "第" + (index + 1) + "行，数量未扫完！")
 //                return false
 //            }
-            if (it.fsourceQty > 0 && it.fqty > it.fsourceQty) {
-                Comm.showWarnDialog(context, "第" + (index + 1) + "行，（扫码数）+（未配数）不能大于（配套数）！")
+            if (it.fqty > it.fsourceQty) {
+                Comm.showWarnDialog(mContext, "第" + (index + 1) + "行，（扫码数）不能大于（订单数）！")
                 return false
             }
-        }
-        if (dcllStock != null) {
-            Comm.showWarnDialog(context, "请选择（倒冲仓库）！")
-            return false
-        }
-        if(icstockBillEntry.fqty == 0.0) {
-            Comm.showWarnDialog(context, "未齐套，请检查！")
-            return false
-        }
-        if(!isSave) {
-            Comm.showWarnDialog(context, "至少填入一行数量！")
-            return false
         }
 
         return true
@@ -405,20 +382,10 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
     private fun reset() {
         curPos = -1
         isTextChange = false
+        tv_custName.text = "客户："
+        tv_orderNo.text = "订单号："
         et_code.setText("")
-        tv_mtlName.text = "成品名称："
-        tv_mtlNumber.text = "成品代码："
-        tv_fmodel.text = "规格型号："
-        tv_deptName.text = "车间："
-        tv_prodInfo.text = "生产订单："
-        tv_inStockQty.text = "入库数："
-        tv_custNumber.text = "客户编码："
-        tv_custDescribe.text = "客户描述："
-        tv_boxQty.text = "箱数："
-//        tv_dcllStockSel.text = ""
 
-//        dcllStock = null
-        listBomChild = null
         checkDatas.clear()
         mAdapter!!.notifyDataSetChanged()
 
@@ -499,7 +466,7 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 SEL_POSITION -> {// 仓库	返回
                     resetStockGroup()
@@ -509,27 +476,84 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                     }
                     getStockGroup(null)
                 }
-                SEL_PROD -> { // 查询生产订单 返回
-                    val prodOrder = data!!.getSerializableExtra("obj") as ProdOrder_App
-                    setICStockBillEntry(prodOrder)
-                }
-                SEL_STOCK -> {//查询仓库	返回
-                    dcllStock = data!!.getSerializableExtra("obj") as Stock_App
-                    tv_dcllStockSel.text = dcllStock!!.fname
+                SEL_ORDER -> { // 查询销售订单 返回
+//                    val list = data!!.getSerializableExtra("obj") as ArrayList<SeOrderEntry_App>
+//                    setICStockBillEntry(list)
+                    val seOrderEntry = data!!.getSerializableExtra("obj") as SeOrderEntry_App
+                    tv_custName.text = seOrderEntry.seOrder.cust.fname
+                    tv_orderNo.text = Html.fromHtml("订单号:&nbsp;<font color='#6a5acd'>"+seOrderEntry.seOrder.fbillNo+"</font>")
+
+                    // 为了扫码一次添加数量1
+                    var isAddRow = true // 是否新增行
+                    if(checkDatas.size > 0) { // 刷新行
+                        var entry : ICStockBillEntry_App? = null
+                        var position = 0 // 行数
+                        for(icsbe in checkDatas) {
+                            if(seOrderEntry.fitemId == icsbe.fitemId) {
+                                entry = icsbe
+                                break
+                            }
+                            position += 1
+                        }
+
+                        if(entry != null) {
+                            if(entry!!.fqty == entry!!.fsourceQty) {
+                                Comm.showWarnDialog(mContext,"第（"+(position+1).toString()+"）行，数量已经扫完！")
+                                return
+                            }
+                            if(entry!!.fqty > entry!!.fsourceQty) {
+                                Comm.showWarnDialog(mContext,"第（"+(position+1).toString()+"）行，扫描数不能大于订单数！")
+                                return
+                            }
+
+                            for(icsbeB in entry!!.icstockBillEntryBarcodes) {
+                                if(icsbeB.equals(getValues(et_code))) {
+                                    icsbeB.fqty += 1.0
+                                    entry.fqty += 1.0
+
+                                    break
+
+                                } else {
+                                    // 添加条码
+                                    val icsBarcode = ICStockBillEntryBarcode_App()
+                                    icsBarcode.parentId = 0
+                                    icsBarcode.barcode = getValues(et_code)
+                                    icsBarcode.batchCode = ""
+                                    icsBarcode.snCode = ""
+                                    icsBarcode.fqty = 1.0
+                                    icsBarcode.isUniqueness = 'N'
+                                    icsBarcode.againUse = 0
+                                    icsBarcode.createUserName = user!!.username
+                                    icsBarcode.billType = "XSCK"
+                                    entry.icstockBillEntryBarcodes.add(icsBarcode)
+
+                                    entry.fqty += 1.0
+
+                                    break
+                                }
+                            }
+                            checkDatas[position] = entry
+                            mAdapter!!.notifyDataSetChanged()
+                            isAddRow = false
+                        }
+
+                    }
+                    if(isAddRow) {
+                        // 新增行
+                        val entry = setICStockBillEntry(seOrderEntry)
+                        checkDatas.add(entry)
+                        getStockGroup(null)
+
+                        mAdapter!!.notifyDataSetChanged()
+                    }
                 }
                 RESULT_NUM -> { // 数量	返回
                     val bundle = data!!.getExtras()
                     if (bundle != null) {
                         val value = bundle.getString("resultValue", "")
                         val num = parseDouble(value)
-                        if (checkDatas[curPos].fsourceQty == 0.0 || num > checkDatas[curPos].fsourceQty) {
-                            Comm.showWarnDialog(context, "第" + (curPos + 1) + "行，数量已经扫完！")
-                            return
-                        }
                         checkDatas[curPos].fqty = num
                         mAdapter!!.notifyDataSetChanged()
-                        // 计算入库数量
-                        countInStockQty()
                     }
                 }
                 WRITE_CODE -> {// 输入条码  返回
@@ -542,29 +566,31 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                         }
                     }
                 }
-                BaseFragment.CAMERA_SCAN -> {// 扫一扫成功  返回
-                    val hmsScan = data!!.getParcelableExtra(ScanUtil.RESULT) as HmsScan
-                    if (hmsScan != null) {
-                        when (smqFlag) {
-                            '1' -> setTexts(et_positionCode, hmsScan.originalValue)
-                            '2' -> setTexts(et_code, hmsScan.originalValue)
-                        }
-                    }
-                }
             }
         }
         mHandler.sendEmptyMessageDelayed(SETFOCUS, 200)
     }
 
     /**
+     * 调用华为扫码接口，返回的值
+     */
+    fun getScanData(barcode :String) {
+        when (smqFlag) {
+            '1' -> setTexts(et_positionCode, barcode)
+            '2' -> setTexts(et_code, barcode)
+        }
+    }
+
+    /**
      * 设置表头数据
      */
-    private fun setICStockBill(fdeptId: Int): ICStockBill_App {
+    private fun setICStockBill(fcustId: Int, fdeptId: Int): ICStockBill_App {
         var icstockBill = ICStockBill_App() // 保存的对象
-        icstockBill.billType = "SCRK"
-        icstockBill.ftranType = 2
+        icstockBill.billType = "XSCK"
+        icstockBill.ftranType = 21
         icstockBill.frob = 1
-        icstockBill.fselTranType = 85
+        icstockBill.fselTranType = 81
+        icstockBill.fcustId = fcustId
         icstockBill.fdeptId = fdeptId
         icstockBill.fempId = user!!.empId
         icstockBill.yewuMan = user!!.empName
@@ -577,113 +603,48 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         icstockBill.fbillerId = user!!.erpUserId
         icstockBill.createUserId = user!!.id
         icstockBill.createUserName = user!!.username
-        if(dcllStock != null) {
-            icstockBill.dcllStockId = dcllStock!!.fitemId
-            icstockBill.dcllStock = dcllStock
-        }
-
         return icstockBill
     }
 
     /**
-     * 设置分录数据
+     * 设置表体数据
      */
-    private fun setICStockBillEntry(prodOrder: ProdOrder_App) {
-        icstockBillEntry.icstockBillId = 0
-        icstockBillEntry.icstockBill = setICStockBill(prodOrder.fworkShop)
-        icstockBillEntry.fitemId = prodOrder.fitemId
-        icstockBillEntry.funitId = prodOrder.funitId
-        icstockBillEntry.fqty = 0.0
-        icstockBillEntry.fprice = 0.0
-        icstockBillEntry.fsourceTranType = 85
-        icstockBillEntry.fsourceInterId = prodOrder.finterId
-        icstockBillEntry.fsourceEntryId = prodOrder.finterId
-        icstockBillEntry.fsourceBillNo = prodOrder.fbillNo
-        icstockBillEntry.fsourceQty = prodOrder.useableQty
-        icstockBillEntry.fdetailId = prodOrder.finterId
-        icstockBillEntry.forderInterId = prodOrder.fsourceInterId
-        icstockBillEntry.forderEntryId = prodOrder.fsourceEntryId
-        icstockBillEntry.forderBillNo = prodOrder.fsourceBillNo
+    private fun setICStockBillEntry(seOrderEntry: SeOrderEntry_App): ICStockBillEntry_App {
+        val entry = ICStockBillEntry_App()
+        entry.icstockBillId = 0
+        entry.icstockBill = setICStockBill(seOrderEntry.seOrder.fcustId, seOrderEntry.seOrder.fdeptId)
+        entry.fitemId = seOrderEntry.fitemId
+        entry.funitId = seOrderEntry.funitId
+//        entry.fqty = seOrderEntry.useableQty
+        entry.fqty = 1.0
+        entry.fprice = seOrderEntry.fprice
+        entry.fsourceTranType = 81
+        entry.fsourceInterId = seOrderEntry.finterId
+        entry.fsourceEntryId = seOrderEntry.fentryId
+        entry.fsourceBillNo = seOrderEntry.seOrder.fbillNo
+        entry.fsourceQty = seOrderEntry.useableQty
+        entry.fdetailId = seOrderEntry.fdetailId
+        entry.forderInterId = seOrderEntry.finterId
+        entry.forderEntryId = seOrderEntry.fentryId
+        entry.forderBillNo = seOrderEntry.seOrder.fbillNo
 
-        icstockBillEntry.icItem = prodOrder.icItem
-        icstockBillEntry.unit = prodOrder.unit
+        entry.icItem = seOrderEntry.icItem
+        entry.unit = seOrderEntry.unit
 
-        tv_mtlName.text = Html.fromHtml("成品名称：<font color='#6a5acd'>" + prodOrder.icItem.fname + "</font>")
-        tv_mtlNumber.text = Html.fromHtml("成品代码：<font color='#6a5acd'>" + prodOrder.icItem.fnumber + "</font>")
-        tv_fmodel.text = Html.fromHtml("规格型号：<font color='#6a5acd'>" + isNULLS(prodOrder.icItem.fmodel) + "</font>")
-        tv_deptName.text = Html.fromHtml("车间：<font color='#6a5acd'>" + prodOrder.dept.fname + "</font>")
-        tv_prodInfo.text = Html.fromHtml("生产订单：<font color='#000000'>" + prodOrder.fbillNo + "</font>（<font color='#6a5acd'>" + df.format(prodOrder.useableQty) + "</font>&nbsp;<font>" + prodOrder.unit.fname + "</font>）")
-//        tv_inStockQty.text = Html.fromHtml("入库数：<font color='#009900'>" + df.format(prodOrder.useableQty) + "</font>")
-        tv_inStockQty.text = Html.fromHtml("入库数：<font color='#009900'>0</font>")
-        tv_custNumber.text = Html.fromHtml("客户编码：<font color='#6a5acd'>"+ Comm.isNULLS(prodOrder.icItem.custNumber) +"</font>")
-        tv_custDescribe.text = Html.fromHtml("客户描述：<font color='#000000'>"+ Comm.isNULLS(prodOrder.icItem.custDescribe) +"</font>")
-        tv_boxQty.text = Html.fromHtml("箱数：<font color='#6a5acd'>"+ prodOrder.icItem.boxQty.toString() +"</font>")
-
-        // 记录条码
-        val icstockBillEntryBarcodes = ArrayList<ICStockBillEntryBarcode_App>()
+        // 添加条码
         val icsBarcode = ICStockBillEntryBarcode_App()
         icsBarcode.parentId = 0
         icsBarcode.barcode = getValues(et_code)
         icsBarcode.batchCode = ""
         icsBarcode.snCode = ""
-        icsBarcode.fqty = prodOrder.useableQty
+        icsBarcode.fqty = seOrderEntry.useableQty
         icsBarcode.isUniqueness = 'N'
         icsBarcode.againUse = 0
         icsBarcode.createUserName = user!!.username
-        icsBarcode.billType = "SCRK"
-        // 添加到list
-        icstockBillEntryBarcodes.add(icsBarcode)
+        icsBarcode.billType = "XSCK"
+        entry.icstockBillEntryBarcodes.add(icsBarcode)
 
-        // 先把子项的显示到列表中，父项的保存时加入列表
-        listBomChild!!.forEach {
-            val entry = ICStockBillEntry_App()
-            entry.icstockBillId = 0
-            entry.icstockBill = setICStockBill(prodOrder.fworkShop)
-            entry.fitemId = it.fitemId
-            entry.funitId = it.icItem.funitId
-            var mulVal = 0.0
-            if(it.ptQty == 0.0) {
-                mulVal = BigdecimalUtil.mul(it.fqty, prodOrder.useableQty)
-
-            } else {
-                mulVal = it.ptQty
-            }
-            mulVal = mulVal - it.smSumQty
-
-            // 当配套数量大于未配数，扫码数+1
-            if (mulVal > it.remainQty && it.icItem.barcode.equals(getValues(et_code))) {
-                entry.fqty = 1.0
-                entry.icstockBillEntryBarcodes = icstockBillEntryBarcodes
-            }
-//            entry.fqty = 0.0
-            entry.fprice = 0.0
-            entry.fsourceTranType = -1  // -1标识不做入库条件，只做查询
-            entry.fsourceInterId = 0
-            entry.fsourceEntryId = 0
-            entry.fsourceBillNo = ""
-            entry.fsourceQty = mulVal
-            entry.fdetailId = 0
-            entry.forderInterId = 0
-            entry.forderEntryId = 0
-            entry.forderBillNo = ""
-
-            entry.icItem = it.icItem
-            entry.unit = it.icItem.unit
-
-            entry.mulNum = it.fqty
-            if(it.ptQty > 0) {
-                entry.ptQty = it.ptQty
-                entry.wptQty = it.remainQty
-                entry.scrkScanRecordEntryId = it.scrkScanRecordEntryId
-            }
-
-            checkDatas.add(entry)
-        }
-        getStockGroup(null)
-
-        mAdapter!!.notifyDataSetChanged()
-        // 计算入库数量
-        countInStockQty()
+        return entry
     }
 
     /**
@@ -694,8 +655,8 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         curPos = -1
         checkDatas.forEachIndexed { index, it ->
             if (m.fitemId == it.fitemId) {
-                if (it.fsourceQty == 0.0 || it.fqty >= it.fsourceQty) {
-                    Comm.showWarnDialog(context, "第" + (index + 1) + "行，数量已经扫完！")
+                if (it.fqty >= it.fsourceQty) {
+                    Comm.showWarnDialog(mContext, "第" + (index + 1) + "行，数量已经扫完！")
                     return
                 }
                 bool = true
@@ -704,7 +665,7 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
             }
         }
         if (!bool) {
-            Comm.showWarnDialog(context, "扫码的条码不能匹配子项数据！")
+            Comm.showWarnDialog(mContext, "扫码的条码不能匹配子项数据！")
             return
         }
 
@@ -732,48 +693,10 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         }
         mAdapter!!.notifyDataSetChanged()
 
-        // 计算入库数量
-        countInStockQty()
-
         // 扫完了，自动保存
-//        if(isFinish()) {
-//            run_save()
-//        }
-    }
-
-    /**
-     *  计算入库数量
-     */
-    private fun countInStockQty() {
-        var isCountInStockQty = true // 是否计算入库数量
-        var inStockQty = 0.0    // 最小计算后的入库数
-        checkDatas.forEachIndexed { index, it ->
-            if( (it.fqty+it.wptQty) == 0.0) {
-                isCountInStockQty = false
-            }
-
-            // 计算扫码数 + 上次未配套数量的和
-            val addVal = BigdecimalUtil.add(it.fqty, it.wptQty)
-            // 计算（扫码数 + 上次未配套数量的和）/ 物料用量，得到本次入库数
-            val divVal = BigdecimalUtil.div(addVal, it.mulNum)
-            // 计算之后的入库数
-            val inStockQtyTemp = (divVal.toInt()).toDouble()
-            if(index == 0 && inStockQty == 0.0) {
-                inStockQty = inStockQtyTemp
-
-            } else if( inStockQtyTemp < inStockQty) {
-                inStockQty = inStockQtyTemp
-            }
+        if(isFinish()) {
+            run_save()
         }
-
-        if(isCountInStockQty) {
-            icstockBillEntry.fqty = inStockQty
-            tv_inStockQty.text = Html.fromHtml("入库数：<font color='#009900'>"+ df.format(inStockQty) +"</font>")
-        } else {
-            icstockBillEntry.fqty = 0.0
-            tv_inStockQty.text = Html.fromHtml("入库数：<font color='#009900'>0</font>")
-        }
-
     }
 
     /**
@@ -794,9 +717,8 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
     private fun run_smDatas() {
         isTextChange = false
         showLoadDialog("加载中...", false)
-        val mUrl = getURL("prodOrder/findMtlIdByBarcode2")
+        val mUrl = getURL("seOrder/findBarcode")
         val formBody = FormBody.Builder()
-                .add("scanType", if (checkDatas.size > 0) "1" else "0")
                 .add("barcode", getValues(et_code))
                 .build()
 
@@ -817,13 +739,12 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                 val body = response.body()
                 val result = body.string()
                 if (!JsonUtil.isSuccess(result)) {
-                    val msg = mHandler.obtainMessage(UNSUCC1, result)
-                    mHandler.sendMessage(msg)
+                    mHandler.sendEmptyMessage(UNSUCC1)
                     return
                 }
 
                 val msg = mHandler.obtainMessage(SUCC1, result)
-                Log.e("run_smDatas --> onResponse", result)
+                LogUtil.e("run_smDatas --> onResponse", result)
                 mHandler.sendMessage(msg)
             }
         })
@@ -835,23 +756,9 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
     private fun run_save() {
         showLoadDialog("保存中...", false)
 
-        val datas = ArrayList<ICStockBillEntry_App>()
-        icstockBillEntry.fdcStockId = checkDatas[0].fdcStockId
-        icstockBillEntry.fdcSPId = checkDatas[0].fdcSPId
-        icstockBillEntry.stock = checkDatas[0].stock
-        icstockBillEntry.stockPlace = checkDatas[0].stockPlace
-        // 倒冲仓库
-        if(icstockBillEntry.icstockBill.dcllStockId == 0) {
-            icstockBillEntry.icstockBill.dcllStockId = dcllStock!!.fitemId
-            icstockBillEntry.icstockBill.dcllStock = dcllStock
-        }
-
-        datas.add(icstockBillEntry)
-        datas.addAll(checkDatas)
-
-        var mUrl = getURL("stockBill_WMS/save_ProdInStock")
+        var mUrl = getURL("stockBill_WMS/save_SalOrderOutStock")
         val formBody = FormBody.Builder()
-                .add("strJson", JsonUtil.objectToString(datas))
+                .add("strJson", JsonUtil.objectToString(checkDatas))
                 .build()
 
         val request = Request.Builder()
@@ -889,16 +796,9 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         if (user == null) user = showUserByXml()
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            context.finish()
-        }
-        return false
-    }
-
-    override fun onDestroy() {
+    override fun onDestroyView() {
         closeHandler(mHandler)
-        super.onDestroy()
+        mBinder!!.unbind()
+        super.onDestroyView()
     }
-
 }

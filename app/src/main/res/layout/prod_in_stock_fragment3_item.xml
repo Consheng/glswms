@@ -104,4 +104,32 @@
         android:textColor="@color/c_666666"
         android:textSize="@dimen/_12sp" />
 
+    <TextView
+        android:id="@+id/tv_custNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_stockName"
+        android:text="客户编码："
+        android:textColor="@color/c_666666"
+        android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_boxQty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_stockName"
+        android:layout_centerHorizontal="true"
+        android:text="箱数："
+        android:textColor="@color/c_666666"
+        android:textSize="@dimen/_12sp" />
+
+    <TextView
+        android:id="@+id/tv_custDescribe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_custNumber"
+        android:text="客户描述："
+        android:textColor="@color/c_666666"
+        android:textSize="@dimen/_12sp" />
+
 </RelativeLayout>

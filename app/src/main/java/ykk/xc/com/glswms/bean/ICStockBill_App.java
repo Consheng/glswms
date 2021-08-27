@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import ykk.xc.com.glswms.bean.k3Bean.Customer_App;
 import ykk.xc.com.glswms.bean.k3Bean.Department_App;
+import ykk.xc.com.glswms.bean.k3Bean.Stock_App;
 import ykk.xc.com.glswms.bean.k3Bean.Supplier_App;
 import ykk.xc.com.glswms.comm.Comm;
 
@@ -49,10 +50,13 @@ public class ICStockBill_App implements Serializable {
 	private String expressNo;			// 快递单号
 	private String expressCompany;		// 快递公司
 	private int childSize;				// 分录个数
+	private int dcllStockId;				// 倒冲仓库id
 
 	private Supplier_App supplier;			// 供应商对象
 	private Department_App department;	// 部门对象
 	private Customer_App cust;	// 客户对象
+	private Stock_App dcllStock;	// 倒冲仓库
+
 
 	// 临时字段，不存表
 	private boolean showButton; 		// 是否显示操作按钮
@@ -331,5 +335,19 @@ public class ICStockBill_App implements Serializable {
 		this.strSourceNo = strSourceNo;
 	}
 
-	
+	public int getDcllStockId() {
+		return dcllStockId;
+	}
+
+	public void setDcllStockId(int dcllStockId) {
+		this.dcllStockId = dcllStockId;
+	}
+
+	public Stock_App getDcllStock() {
+		return dcllStock;
+	}
+
+	public void setDcllStock(Stock_App dcllStock) {
+		this.dcllStock = dcllStock;
+	}
 }

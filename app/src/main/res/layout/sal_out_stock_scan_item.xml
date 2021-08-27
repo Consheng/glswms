@@ -16,12 +16,20 @@
         android:textColor="@color/c_FF4400"
         android:textSize="@dimen/_14sp" />
 
+    <View
+        android:id="@+id/view_del"
+        android:layout_width="@dimen/_38dp"
+        android:layout_height="@dimen/_38dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ico_del2" />
+
     <TextView
         android:id="@+id/tv_row"
         android:layout_width="38dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="@dimen/_3dp"
+        android:layout_below="@+id/view_del"
         android:background="@color/c_666666"
         android:gravity="center"
         android:textColor="@color/white"
@@ -37,26 +45,16 @@
         android:textSize="@dimen/_12sp" />
 
     <TextView
-        android:id="@+id/tv_ptQty"
+        android:id="@+id/tv_sourceQty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_mtlNumber"
-        android:text="配套数："
+        android:text="订单数："
         android:textColor="@color/c_666666"
         android:textSize="@dimen/_12sp" />
 
     <TextView
-        android:id="@+id/tv_wptQty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_mtlNumber"
-        android:layout_centerHorizontal="true"
-        android:text="未配数："
-        android:textColor="@color/c_666666"
-        android:textSize="@dimen/_12sp" />
-
-    <TextView
-        android:id="@+id/tv_smQty"
+        android:id="@+id/tv_fqty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -64,5 +62,6 @@
         android:text="扫码数："
         android:textColor="@color/c_666666"
         android:textSize="@dimen/_12sp" />
+
 
 </RelativeLayout>

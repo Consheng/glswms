@@ -23,6 +23,7 @@ import ykk.xc.com.glswms.bean.ICStockBill_App
 import ykk.xc.com.glswms.bean.User
 import ykk.xc.com.glswms.bean.k3Bean.Department_App
 import ykk.xc.com.glswms.bean.k3Bean.Emp
+import ykk.xc.com.glswms.bean.k3Bean.Stock_App
 import ykk.xc.com.glswms.comm.BaseFragment
 import ykk.xc.com.glswms.comm.Comm
 import ykk.xc.com.glswms.util.JsonUtil
@@ -62,7 +63,7 @@ class Prod_InStock_Fragment1 : BaseFragment() {
     private var timesTamp:String? = null // 时间戳
     var icstockBill = ICStockBill_App() // 保存的对象
     private val df = DecimalFormat("#.###") // 重量保存三位小数
-    private var icStockBillId = 0 // 上个页面传来的id
+    private var icstockBillId = 0 // 上个页面传来的id
     var saveNeedHint = true // 保存之后需要提示
 
     // 消息处理
@@ -100,7 +101,7 @@ class Prod_InStock_Fragment1 : BaseFragment() {
                             m.toasts("保存成功✔")
                             // 滑动第二个页面
                             m.parent!!.viewPager!!.setCurrentItem(1, false)
-                            m.parent!!.isChange = if(m.icStockBillId == 0) true else false
+                            m.parent!!.isChange = if(m.icstockBillId == 0) true else false
                         }
                         m.saveNeedHint = true
                     }
@@ -152,9 +153,11 @@ class Prod_InStock_Fragment1 : BaseFragment() {
         icstockBill.createDate = m.createDate            // 创建日期
         icstockBill.isToK3 = m.isToK3                   // 是否提交到K3
         icstockBill.k3Number = m.k3Number                // k3返回的单号
+        icstockBill.dcllStockId = m.dcllStockId
 
         icstockBill.supplier = m.supplier
         icstockBill.department = m.department
+        icstockBill.dcllStock = m.dcllStock
 
         tv_pdaNo.text = m.pdaNo
         tv_inDateSel.text = m.fdate
@@ -163,6 +166,9 @@ class Prod_InStock_Fragment1 : BaseFragment() {
         }
         tv_emp2Sel.text = m.baoguanMan
         tv_emp4Sel.text = m.yanshouMan
+        if(m.dcllStock != null) {
+            tv_dcllStockSel.text = m.dcllStock.fname
+        }
 
         parent!!.isChange = false
         parent!!.isMainSave = true
@@ -218,9 +224,9 @@ class Prod_InStock_Fragment1 : BaseFragment() {
         val bundle = mContext!!.intent.extras
         if(bundle != null) {
             if(bundle.containsKey("id")) { // 查询过来的
-                icStockBillId = bundle.getInt("id") // ICStockBill主表id
+                icstockBillId = bundle.getInt("id") // ICStockBill主表id
                 // 查询主表信息
-                run_findStockBill(icStockBillId)
+                run_findStockBill(icstockBillId)
             }
         }
     }
@@ -232,7 +238,7 @@ class Prod_InStock_Fragment1 : BaseFragment() {
         }
     }
 
-    @OnClick(R.id.tv_inDateSel, R.id.tv_deptSel, R.id.tv_stockSel, R.id.tv_emp2Sel, R.id.tv_emp4Sel,
+    @OnClick(R.id.tv_inDateSel, R.id.tv_deptSel, R.id.tv_dcllStockSel, R.id.tv_emp2Sel, R.id.tv_emp4Sel,
              R.id.btn_save, R.id.btn_clone)
     fun onViewClicked(view: View) {
         var bundle: Bundle? = null
@@ -243,11 +249,8 @@ class Prod_InStock_Fragment1 : BaseFragment() {
             R.id.tv_deptSel -> { // 选择部门
                 showForResult(Dept_DialogActivity::class.java, SEL_DEPT, null)
             }
-            R.id.tv_stockSel -> { // 选择仓库
-                val bundle = Bundle()
-                bundle.putString("accountType", "SC")
-                bundle.putInt("unDisable", 1) // 只显示未禁用的数据
-                showForResult(Stock_DialogActivity::class.java, SEL_STOCK, bundle)
+            R.id.tv_dcllStockSel -> { // 选择仓库
+                showForResult(Stock_DialogActivity::class.java, SEL_STOCK, null)
             }
 //            R.id.tv_emp1Sel -> { // 选择业务员
 //                bundle = Bundle()
@@ -299,6 +302,10 @@ class Prod_InStock_Fragment1 : BaseFragment() {
 //            Comm.showWarnDialog(mContext, "请选择部门！")
 //            return false
 //        }
+        if (icstockBill.dcllStockId == 0) {
+            Comm.showWarnDialog(mContext, "请选择倒冲仓库！")
+            return false
+        }
         if(icstockBill.fsmanagerId == 0) {
             if(isHint) Comm.showWarnDialog(mContext, "请选择保管人！")
             return false
@@ -321,7 +328,7 @@ class Prod_InStock_Fragment1 : BaseFragment() {
         tv_pdaNo.text = ""
         tv_inDateSel.text = Comm.getSysDate(7)
         tv_deptSel.text = ""
-        tv_stockSel.text = ""
+        tv_dcllStockSel.text = ""
 //        tv_emp2Sel.text = ""
 //        tv_emp4Sel.text = ""
 //        tv_weightUnitType.text = "千克（kg）"
@@ -330,6 +337,8 @@ class Prod_InStock_Fragment1 : BaseFragment() {
         icstockBill.pdaNo = ""
         icstockBill.fsupplyId = 0
         icstockBill.fdeptId = 0
+        icstockBill.dcllStockId = 0
+        icstockBill.dcllStock = null
 //        icstockBill.fempId = 0
 //        icstockBill.fsmanagerId = 0
 //        icstockBill.fmanagerId = 0
@@ -360,6 +369,12 @@ class Prod_InStock_Fragment1 : BaseFragment() {
                     tv_deptSel.text = dept!!.fname
                     icstockBill.fdeptId = dept.fitemId
                     icstockBill.department = dept
+                }
+                SEL_STOCK -> {//查询仓库	返回
+                    val stock = data!!.getSerializableExtra("obj") as Stock_App
+                    tv_dcllStockSel.text = stock.fname
+                    icstockBill.dcllStockId = stock.fitemId
+                    icstockBill.dcllStock = stock
                 }
                 SEL_EMP2 -> {//查询保管人	返回
                     val emp = data!!.getSerializableExtra("obj") as Emp

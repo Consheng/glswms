@@ -144,7 +144,6 @@
                 android:layout_height="38dp"
                 android:layout_marginLeft="@dimen/_8dp"
                 android:layout_marginRight="@dimen/_8dp"
-                android:visibility="gone"
                 android:layout_marginTop="@dimen/_8dp"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -156,12 +155,12 @@
                     android:ems="6"
                     android:gravity="center|right"
                     android:paddingRight="@dimen/_6dp"
-                    android:text="收料仓库*"
+                    android:text="倒冲仓库*"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/tv_stockSel"
+                    android:id="@+id/tv_dcllStockSel"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/_6dp"

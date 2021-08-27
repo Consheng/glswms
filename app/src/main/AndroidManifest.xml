@@ -147,13 +147,20 @@
 
         <!-- 销售模块 -->
         <activity
-            android:name=".sales.Sal_OutStockMainActivity"
+        android:name=".sales.Sal_OutStockMainActivity"
+        android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".sales.Sal_OutStock_SaoMaMainActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".sales.Sal_OutStock_SaoMaActivity"
+            android:name=".sales.Sal_OutStock_ScanActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
-            android:name=".sales.Sal_Sel_List_Dialog"
+            android:name=".sales.Sal_Sel_SalOrder_Dialog"
+            android:theme="@style/dialogStyle"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".sales.Sal_Sel_DeliOrder_Dialog"
             android:theme="@style/dialogStyle"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 

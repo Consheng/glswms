@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import butterknife.OnClick
 import ykk.xc.com.glswms.R
 import ykk.xc.com.glswms.comm.BaseFragment
-import ykk.xc.com.glswms.sales.Sal_OutStockMainActivity
-import ykk.xc.com.glswms.sales.Sal_OutStock_SaoMaActivity
+import ykk.xc.com.glswms.sales.Sal_OutStock_SaoMaMainActivity
+import ykk.xc.com.glswms.sales.Sal_OutStock_ScanActivity
 import ykk.xc.com.glswms.warehouse.OutInStock_Search_MainActivity
 
 /**
@@ -33,7 +33,8 @@ class MainTabFragment3 : BaseFragment() {
             }
             R.id.relative2 -> {// 销售出库
 //                show(Sal_OutStockMainActivity::class.java, null)
-                show(Sal_OutStock_SaoMaActivity::class.java, null)
+//                show(Sal_OutStock_ScanActivity::class.java, null)
+                show(Sal_OutStock_SaoMaMainActivity::class.java, null)
             }
             R.id.relative3 -> {// 销售退货
 //                show(Sal_DS_OutStock_RED_MainActivity::class.java, null)
@@ -47,10 +48,6 @@ class MainTabFragment3 : BaseFragment() {
             R.id.relative6 -> {// 备注查询
 //                show(Sal_OrderInfoSearchByScanActivity::class.java, null)
             }
-        }//                show(Sal_ScOutMainActivity.class, null);
-        //                show(Sal_DsOutReturnMainActivity.class, null);
-        //                show(Sal_NxOutReturnMainActivity.class, null);
-        //                show(Sal_DsBToRFromPurchaseInStockMainActivity.class, null);
-        //                show(Sal_OutStockMainActivity.class, null);
+        }
     }
 }

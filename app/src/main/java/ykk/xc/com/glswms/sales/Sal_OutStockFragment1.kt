@@ -16,7 +16,7 @@ import butterknife.OnClick
 import com.huawei.hms.hmsscankit.ScanUtil
 import com.huawei.hms.ml.scan.HmsScan
 import com.huawei.hms.ml.scan.HmsScanAnalyzerOptions
-import kotlinx.android.synthetic.main.sal_out_fragment1.*
+import kotlinx.android.synthetic.main.sal_out_stock_fragment1.*
 import okhttp3.*
 import ykk.xc.com.glswms.R
 import ykk.xc.com.glswms.basics.Stock_GroupDialogActivity
@@ -212,7 +212,7 @@ class Sal_OutStockFragment1 : BaseFragment() {
     }
 
     override fun setLayoutResID(inflater: LayoutInflater, container: ViewGroup): View {
-        return inflater.inflate(R.layout.sal_out_fragment1, container, false)
+        return inflater.inflate(R.layout.sal_out_stock_fragment1, container, false)
     }
 
     override fun initView() {

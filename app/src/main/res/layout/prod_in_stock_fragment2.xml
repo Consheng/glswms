@@ -213,10 +213,37 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tv_unitName"
+                    android:id="@+id/tv_custNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_fmodel"
+                    android:text="客户编码："
+                    android:textColor="@color/c_666666"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_custDescribe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_custNumber"
+                    android:text="客户描述："
+                    android:textColor="@color/c_666666"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_boxQty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_custDescribe"
+                    android:text="箱数："
+                    android:textColor="@color/c_666666"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_unitName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_boxQty"
                     android:text="单位："
                     android:textColor="@color/c_666666"
                     android:textSize="12sp" />

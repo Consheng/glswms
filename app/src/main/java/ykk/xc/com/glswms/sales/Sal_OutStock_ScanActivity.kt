@@ -17,7 +17,7 @@ import butterknife.OnClick
 import com.huawei.hms.hmsscankit.ScanUtil
 import com.huawei.hms.ml.scan.HmsScan
 import com.huawei.hms.ml.scan.HmsScanAnalyzerOptions
-import kotlinx.android.synthetic.main.sal_out_stock_saoma.*
+import kotlinx.android.synthetic.main.sal_out_stock_scan.*
 import okhttp3.*
 import ykk.xc.com.glswms.R
 import ykk.xc.com.glswms.basics.Stock_GroupDialogActivity
@@ -33,7 +33,7 @@ import ykk.xc.com.glswms.comm.BaseDialogActivity
 import ykk.xc.com.glswms.comm.BaseFragment
 import ykk.xc.com.glswms.comm.BaseFragment.CAMERA_SCAN
 import ykk.xc.com.glswms.comm.Comm
-import ykk.xc.com.glswms.sales.adapter.Sal_OutStock_SaoMa_Adapter
+import ykk.xc.com.glswms.sales.adapter.Sal_OutStock_Scan_Adapter
 import ykk.xc.com.glswms.util.JsonUtil
 import ykk.xc.com.glswms.util.LogUtil
 import ykk.xc.com.glswms.util.basehelper.BaseRecyclerAdapter
@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit
 /**
  *  销售出库（扫描）
  */
-class Sal_OutStock_SaoMaActivity : BaseDialogActivity() {
+class Sal_OutStock_ScanActivity : BaseDialogActivity() {
 
     companion object {
         private val SEL_POSITION = 61
@@ -62,7 +62,7 @@ class Sal_OutStock_SaoMaActivity : BaseDialogActivity() {
 
     private val context = this
     private val checkDatas = ArrayList<ICStockBillEntry_App>()
-    private var mAdapter: Sal_OutStock_SaoMa_Adapter? = null
+    private var mAdapter: Sal_OutStock_Scan_Adapter? = null
     private var okHttpClient: OkHttpClient? = null
     private var isTextChange: Boolean = false // 是否进入TextChange事件
     private var timesTamp: String? = null // 时间戳
@@ -76,8 +76,8 @@ class Sal_OutStock_SaoMaActivity : BaseDialogActivity() {
     // 消息处理
     private val mHandler = MyHandler(this)
 
-    private class MyHandler(activity: Sal_OutStock_SaoMaActivity) : Handler() {
-        private val mActivity: WeakReference<Sal_OutStock_SaoMaActivity>
+    private class MyHandler(activity: Sal_OutStock_ScanActivity) : Handler() {
+        private val mActivity: WeakReference<Sal_OutStock_ScanActivity>
 
         init {
             mActivity = WeakReference(activity)
@@ -114,7 +114,7 @@ class Sal_OutStock_SaoMaActivity : BaseDialogActivity() {
 //                                bundle.putInt("fcustId", if(m.checkDatas.size > 0) m.checkDatas[0].icstockBill.fcustId else 0)
                                 bundle.putSerializable("listDetailId", listDetailId)
                                 bundle.putBoolean("returnMinOrder", if(m.cb_returnMinOrder.isChecked) false else true) // 是否指定订单出库
-                                m.showForResult(Sal_Sel_List_Dialog::class.java, SEL_ORDER, bundle)
+                                m.showForResult(Sal_Sel_SalOrder_Dialog::class.java, SEL_ORDER, bundle)
                             }
                         }
                     }
@@ -153,7 +153,7 @@ class Sal_OutStock_SaoMaActivity : BaseDialogActivity() {
     }
 
     override fun setLayoutResID(): Int {
-        return R.layout.sal_out_stock_saoma
+        return R.layout.sal_out_stock_scan
     }
 
     override fun initView() {
@@ -167,13 +167,13 @@ class Sal_OutStock_SaoMaActivity : BaseDialogActivity() {
 
         recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         recyclerView.layoutManager = LinearLayoutManager(context)
-        mAdapter = Sal_OutStock_SaoMa_Adapter(context, checkDatas)
+        mAdapter = Sal_OutStock_Scan_Adapter(context, checkDatas)
         recyclerView.adapter = mAdapter
         // 设值listview空间失去焦点
         recyclerView.isFocusable = false
 
         // 行事件
-        mAdapter!!.setCallBack(object : Sal_OutStock_SaoMa_Adapter.MyCallBack {
+        mAdapter!!.setCallBack(object : Sal_OutStock_Scan_Adapter.MyCallBack {
             override fun onDelete(entity: ICStockBillEntry_App, position: Int) {
                 checkDatas.removeAt(position)
                 mAdapter!!.notifyDataSetChanged()
@@ -702,7 +702,7 @@ class Sal_OutStock_SaoMaActivity : BaseDialogActivity() {
     private fun run_save() {
         showLoadDialog("保存中...", false)
 
-        var mUrl = getURL("stockBill_WMS/save_SalOutStock")
+        var mUrl = getURL("stockBill_WMS/save_SalOrderOutStock")
         val formBody = FormBody.Builder()
                 .add("strJson", JsonUtil.objectToString(checkDatas))
                 .build()

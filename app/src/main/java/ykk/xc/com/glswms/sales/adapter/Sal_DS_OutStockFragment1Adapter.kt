@@ -16,7 +16,7 @@ class Sal_DS_OutStockFragment1Adapter(private val context: Activity, datas: List
     private var callBack: MyCallBack? = null
 
     override fun bindView(viewtype: Int): Int {
-        return R.layout.sal_out_fragment1_item
+        return R.layout.sal_out_stock_fragment1_item
     }
 
     override fun onBindHoder(holder: BaseRecyclerAdapter.RecyclerHolder, entity: ICStockBillEntry_App, pos: Int) {

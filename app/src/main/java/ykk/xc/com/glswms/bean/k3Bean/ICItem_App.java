@@ -23,6 +23,9 @@ public class ICItem_App implements Serializable {
 	private int fspId;				// 默认库位id
 	private int icItemTypeId;		// 产品类型id ( 20013：主产品，20014：副产品，2000003：赠品 )
 	private String barcode;			// 条码
+	private String custNumber;		// 客户编码
+	private String custDescribe;	// 客户描述
+	private int boxQty;				// 箱数
 
 	private Unit_App unit;
 	private Stock_App stock; // 仓库
@@ -179,5 +182,28 @@ public class ICItem_App implements Serializable {
 		this.barcode = barcode;
 	}
 
+	public String getCustNumber() {
+		return custNumber;
+	}
+
+	public void setCustNumber(String custNumber) {
+		this.custNumber = custNumber;
+	}
+
+	public String getCustDescribe() {
+		return custDescribe;
+	}
+
+	public void setCustDescribe(String custDescribe) {
+		this.custDescribe = custDescribe;
+	}
+
+	public int getBoxQty() {
+		return boxQty;
+	}
+
+	public void setBoxQty(int boxQty) {
+		this.boxQty = boxQty;
+	}
 	
 }

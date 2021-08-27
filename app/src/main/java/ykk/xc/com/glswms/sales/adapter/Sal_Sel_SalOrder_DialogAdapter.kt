@@ -5,19 +5,18 @@ import android.text.Html
 import android.widget.TextView
 import ykk.xc.com.glswms.R
 import ykk.xc.com.glswms.bean.k3Bean.Customer_App
-import ykk.xc.com.glswms.bean.k3Bean.ProdOrder_App
 import ykk.xc.com.glswms.bean.k3Bean.SeOrderEntry_App
 import ykk.xc.com.glswms.comm.Comm
 import ykk.xc.com.glswms.util.basehelper.BaseArrayRecyclerAdapter
 import ykk.xc.com.glswms.util.basehelper.BaseRecyclerAdapter
 import java.text.DecimalFormat
 
-class Sal_Sel_List_DialogAdapter(private val context: Activity, private val datas: List<SeOrderEntry_App>) : BaseArrayRecyclerAdapter<SeOrderEntry_App>(datas) {
+class Sal_Sel_SalOrder_DialogAdapter(private val context: Activity, private val datas: List<SeOrderEntry_App>) : BaseArrayRecyclerAdapter<SeOrderEntry_App>(datas) {
     private val df = DecimalFormat("#.######")
     private var callBack: MyCallBack? = null
 
     override fun bindView(viewtype: Int): Int {
-        return R.layout.sal_sel_list_dialog_item
+        return R.layout.sal_sel_sal_order_dialog_item
     }
 
     override fun onBindHoder(holder: BaseRecyclerAdapter.RecyclerHolder, entity: SeOrderEntry_App, pos: Int) {

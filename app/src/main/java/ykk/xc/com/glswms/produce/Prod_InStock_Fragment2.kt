@@ -488,6 +488,9 @@ class Prod_InStock_Fragment2 : BaseFragment() {
         tv_mtlName.text = ""
         tv_mtlNumber.text = "物料代码："
         tv_fmodel.text = "规格型号："
+        tv_custNumber.text = "客户编码："
+        tv_custDescribe.text = "客户描述："
+        tv_boxQty.text = "箱数："
         tv_unitName.text = "单位："
         tv_sourceNo.text = "生产订单："
         tv_stockQty.text = "即时库存：0"
@@ -597,6 +600,9 @@ class Prod_InStock_Fragment2 : BaseFragment() {
         tv_mtlName.text = icEntry.icItem.fname
         tv_mtlNumber.text = Html.fromHtml("物料代码：<font color='#6a5acd'>"+ icEntry.icItem.fnumber +"</font>")
         tv_fmodel.text = Html.fromHtml("规格型号：<font color='#6a5acd'>"+ isNULLS(icEntry.icItem.fmodel) +"</font>")
+        tv_custNumber.text = Html.fromHtml("客户编码：<font color='#6a5acd'>"+ isNULLS(icEntry.icItem.custNumber) +"</font>")
+        tv_custDescribe.text = Html.fromHtml("客户描述：<font color='#6a5acd'>"+ isNULLS(icEntry.icItem.custDescribe) +"</font>")
+        tv_boxQty.text = Html.fromHtml("箱数：<font color='#6a5acd'>"+ isNULLS(icEntry.icItem.boxQty) +"</font>")
         tv_unitName.text = Html.fromHtml("单位：<font color='#000000'>"+ icEntry.unit.fname +"</font>")
         tv_sourceNo.text = Html.fromHtml("生产订单：<font color='#6a5acd'>"+ icEntry.fsourceBillNo +"</font>")
         tv_sourceQty.text = if(icEntry.fsourceQty > 0) df.format(icEntry.fsourceQty) else ""
@@ -971,7 +977,7 @@ class Prod_InStock_Fragment2 : BaseFragment() {
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body()
                 val result = body.string()
-                LogUtil.e("run_findQty --> onResponse", result)
+                LogUtil.e("run_findEntryId --> onResponse", result)
                 if (!JsonUtil.isSuccess(result)) {
                     val msg = mHandler.obtainMessage(UNSUCC3, result)
                     mHandler.sendMessage(msg)

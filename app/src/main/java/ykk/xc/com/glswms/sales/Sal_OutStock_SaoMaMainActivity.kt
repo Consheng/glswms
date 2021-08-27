@@ -19,33 +19,29 @@ import ykk.xc.com.glswms.comm.BaseActivity
 import ykk.xc.com.glswms.comm.BaseFragment
 import ykk.xc.com.glswms.comm.Comm
 import ykk.xc.com.glswms.util.adapter.BaseFragmentAdapter
-import java.text.DecimalFormat
 
 /**
- * 日期：2019-10-16 09:14
+ * 日期：2021-08-24 14:14
  * 描述：销售出库
  * 作者：ykk
  */
-class Sal_OutStockMainActivity : BaseActivity() {
+class Sal_OutStock_SaoMaMainActivity : BaseActivity() {
 
     private val context = this
-    private val TAG = "Sal_DS_OutStockMainActivity"
+    private val TAG = "Sal_OutStock_SaoMaMainActivity"
     private var curRadio: View? = null
-    private var curRadioName: TextView? = null
     var isChange: Boolean = false // 返回的时候是否需要判断数据是否保存了
-//    private val listMaps = ArrayList<Map<String, Any>>()
-    private val df = DecimalFormat("#.####")
-    val fragment1 = Sal_OutStockFragment1()
-    var isMainSave = false // 主表信息是否保存
+    val fragment1 = Sal_OutStock_SaoMaFragment1()
+    val fragment2 = Sal_OutStock_SaoMaFragment2()
+    var pageId = 0
 
     override fun setLayoutResID(): Int {
-        return R.layout.sal_out_stock_main
+        return R.layout.sal_out_stock_saoma_main
     }
 
     override fun initData() {
         bundle()
         curRadio = viewRadio1
-//        curRadioName = tv_radioName1
         val listFragment = ArrayList<Fragment>()
 //        Bundle bundle2 = new Bundle();
 //        bundle2.putSerializable("customer", customer);
@@ -56,11 +52,12 @@ class Sal_OutStockMainActivity : BaseActivity() {
 //        Sal_OutFragment3 fragment3 = new Sal_OutFragment3();
 
         listFragment.add(fragment1)
+        listFragment.add(fragment2)
         viewPager.setScanScroll(false); // 禁止左右滑动
         //ViewPager设置适配器
         viewPager.setAdapter(BaseFragmentAdapter(supportFragmentManager, listFragment))
         //设置ViewPage缓存界面数，默认为1
-        viewPager.offscreenPageLimit = 1
+        viewPager.offscreenPageLimit = 2
         //ViewPager显示第一个Fragment
         viewPager!!.setCurrentItem(0)
 
@@ -71,11 +68,10 @@ class Sal_OutStockMainActivity : BaseActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-//                when (position) {
-//                    0 -> tabChange(viewRadio1!!, tv_radioName1, "表头", 0)
-//                    1 -> tabChange(viewRadio2!!, tv_radioName2, "添加分录", 1)
-//                    2 -> tabChange(viewRadio3!!, tv_radioName3, "表体", 2)
-//                }
+                when (position) {
+                    0 -> tabChange(viewRadio1,0)
+                    1 -> tabChange(viewRadio2,1)
+                }
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -91,7 +87,7 @@ class Sal_OutStockMainActivity : BaseActivity() {
         }
     }
 
-    @OnClick(R.id.btn_close, R.id.lin_tab1, R.id.lin_tab2, R.id.lin_tab3, R.id.btn_appointment)
+    @OnClick(R.id.btn_close, R.id.lin_tab1, R.id.lin_tab2, R.id.btn_appointment)
     fun onViewClicked(view: View) {
         // setCurrentItem第二个参数控制页面切换动画
         //  true:打开/false:关闭
@@ -122,44 +118,21 @@ class Sal_OutStockMainActivity : BaseActivity() {
 //                context.fragment1.appointment()
             }
             R.id.lin_tab1 -> {
-//                tabChange(viewRadio1!!, tv_radioName1, "表头", 0)
+              tabChange(viewRadio1, 0)
             }
             R.id.lin_tab2 -> {
-                if(isMainSave) {
-//                    tabChange(viewRadio2!!, tv_radioName2, "添加分录", 1)
-                } else {
-                    Comm.showWarnDialog(context,"请先完善（表头）信息！")
-                }
-            }
-            R.id.lin_tab3 -> {
-                if(isMainSave) {
-//                    tabChange(viewRadio3!!, tv_radioName3, "表体", 2)
-                } else {
-                    Comm.showWarnDialog(context,"请先完善（表头）信息！")
-                }
+                tabChange(viewRadio2, 1)
             }
         }
     }
 
-    /**
-     * 选中之后改变样式
-     */
-    private fun tabSelected(v: View, tv: TextView) {
+    private fun tabChange(v: View, page: Int) {
+        pageId = page
         curRadio!!.setBackgroundResource(R.drawable.check_off2)
         v.setBackgroundResource(R.drawable.check_on)
         curRadio = v
-        curRadioName!!.setTextColor(Color.parseColor("#000000"))
-        tv.setTextColor(Color.parseColor("#FF4400"))
-        curRadioName = tv
-    }
-
-    private fun tabChange(view: View, tv: TextView, str: String, page: Int) {
-        tabSelected(view, tv)
-//        tv_title.text = str
         viewPager!!.setCurrentItem(page, false)
     }
-
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -170,7 +143,10 @@ class Sal_OutStockMainActivity : BaseActivity() {
                 BaseFragment.CAMERA_SCAN -> {// 扫一扫成功  返回
                     val hmsScan = data!!.getParcelableExtra(ScanUtil.RESULT) as HmsScan
                     if (hmsScan != null) {
-                        fragment1.getScanData(hmsScan.originalValue)
+                        when(pageId) {
+                            0 -> fragment1.getScanData(hmsScan.originalValue)
+                            1 -> fragment2.getScanData(hmsScan.originalValue)
+                        }
                     }
                 }
             }

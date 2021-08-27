@@ -31,6 +31,9 @@ class Prod_InStock_Fragment3_Adapter(private val context: Activity, datas: List<
         val view_del = holder.obtainView<View>(R.id.view_del)
         val tv_stockName = holder.obtainView<TextView>(R.id.tv_stockName)
         val tv_stockPosName = holder.obtainView<TextView>(R.id.tv_stockPosName)
+        val tv_custNumber = holder.obtainView<TextView>(R.id.tv_custNumber)
+        val tv_custDescribe = holder.obtainView<TextView>(R.id.tv_custDescribe)
+        val tv_boxQty = holder.obtainView<TextView>(R.id.tv_boxQty)
 
         // 赋值
         tv_row.text = (pos+1).toString()
@@ -46,6 +49,9 @@ class Prod_InStock_Fragment3_Adapter(private val context: Activity, datas: List<
 
         tv_num.text = Html.fromHtml("数量:&nbsp;<font color='#FF0000'>"+ df.format(entity.fqty) +"</font>")
         tv_sourceNo.text = Html.fromHtml("源单:&nbsp;<font color='#000000'>"+ entity.fsourceBillNo+"</font>（<font color='#6a5acd'>"+df.format(entity.fsourceQty) +"</font>&nbsp;<font>"+ entity.unit.fname +"</font>）")
+        tv_custNumber.text = Html.fromHtml("客户编码:&nbsp;<font color='#6a5acd'>"+ Comm.isNULLS(entity.icItem.custNumber) +"</font>")
+        tv_custDescribe.text = Html.fromHtml("客户描述:&nbsp;<font color='#000000'>"+ Comm.isNULLS(entity.icItem.custDescribe) +"</font>")
+        tv_boxQty.text = Html.fromHtml("箱数:&nbsp;<font color='#6a5acd'>"+ entity.icItem.boxQty.toString() +"</font>")
 
         // 显示仓库组信息
         if(entity.stock != null ) {
