@@ -179,8 +179,7 @@ class MainTabFragmentActivity : BaseActivity(), IDownloadContract.View {
         //  true:打开/false:关闭
         //  viewPager.setCurrentItem(0, false);
         when (view.id) {
-            R.id.btn_close // 退出
-            -> {
+            R.id.btn_close -> { // 退出
                 val build = AlertDialog.Builder(context)
                 build.setIcon(R.drawable.caution)
                 build.setTitle("系统提示")
