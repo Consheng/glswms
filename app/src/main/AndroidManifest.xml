@@ -143,6 +143,11 @@
             android:name=".produce.Prod_Sel_List_Dialog"
             android:theme="@style/dialogStyle"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".produce.Prod_Confirm_Mtl_Sel_List_Dialog"
+            android:theme="@style/dialogStyle"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+
 
 
         <!-- 销售模块 -->

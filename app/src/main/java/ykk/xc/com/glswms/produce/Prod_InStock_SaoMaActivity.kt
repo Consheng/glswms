@@ -383,7 +383,7 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
                 return false
             }
         }
-        if (dcllStock != null) {
+        if (dcllStock == null) {
             Comm.showWarnDialog(context, "请选择（倒冲仓库）！")
             return false
         }
@@ -406,6 +406,7 @@ class Prod_InStock_SaoMaActivity : BaseDialogActivity() {
         curPos = -1
         isTextChange = false
         et_code.setText("")
+        et_positionCode.setText("")
         tv_mtlName.text = "成品名称："
         tv_mtlNumber.text = "成品代码："
         tv_fmodel.text = "规格型号："

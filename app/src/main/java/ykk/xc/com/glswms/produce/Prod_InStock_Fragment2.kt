@@ -37,6 +37,7 @@ import ykk.xc.com.glswms.comm.Comm
 import ykk.xc.com.glswms.util.JsonUtil
 import ykk.xc.com.glswms.util.LogUtil
 import java.io.IOException
+import java.io.Serializable
 import java.lang.ref.WeakReference
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
@@ -112,12 +113,29 @@ class Prod_InStock_Fragment2 : BaseFragment() {
                                 m.getStockGroup(msgObj)
                             }
                             '2'-> { // 物料
+                                val list = JsonUtil.strToList(msgObj, ICItem_App::class.java)
+
+                                if(list.size > 1) {
+                                    // 打开物料列表供选择
+                                    val bundle = Bundle()
+                                    bundle.putSerializable("checkDatas", list as Serializable)
+                                    m.showForResult(m.context, Prod_Confirm_Mtl_Sel_List_Dialog::class.java, SEL_MTL, bundle)
+
+                                } else {
+                                    // 打开生产订单列表供选择
+                                    val bundle = Bundle()
+                                    bundle.putInt("fitemId", list[0].fitemId)
+                                    bundle.putInt("deptId", m.parent!!.fragment1.icstockBill.fdeptId)
+                                    m.showForResult(m.context, Prod_Sel_List_Dialog::class.java, SEL_PROD, bundle)
+                                }
+
+                                /*
                                 val mtlId = JsonUtil.strToString(msgObj)
                                 // 打开生产订单列表供选择
                                 val bundle = Bundle()
                                 bundle.putInt("fitemId", mtlId.toInt())
                                 bundle.putInt("deptId", m.parent!!.fragment1.icstockBill.fdeptId)
-                                m.showForResult(m.context, Prod_Sel_List_Dialog::class.java, SEL_PROD, bundle)
+                                m.showForResult(m.context, Prod_Sel_List_Dialog::class.java, SEL_PROD, bundle)*/
 
                                 /*val list = JsonUtil.strToList(msgObj, String::class.java)
                                 val prodOrder = JsonUtil.stringToObject(list[0], ProdOrder_App::class.java) // 生产订单
@@ -484,6 +502,8 @@ class Prod_InStock_Fragment2 : BaseFragment() {
             showLocalStockGroup()
         }
 //        setEnables(tv_num, R.drawable.back_style_blue, true)
+        et_code.setText("")
+        et_positionCode.setText("")
         btn_save.text = "添加"
         tv_mtlName.text = ""
         tv_mtlNumber.text = "物料代码："
@@ -645,6 +665,11 @@ class Prod_InStock_Fragment2 : BaseFragment() {
                 }
                 SEL_MTL -> { //查询物料	返回
                     val icItem = data!!.getSerializableExtra("obj") as ICItem_App
+                    // 打开生产订单列表供选择
+                    val bundle = Bundle()
+                    bundle.putInt("fitemId", icItem.fitemId)
+                    bundle.putInt("deptId", parent!!.fragment1.icstockBill.fdeptId)
+                    showForResult(context, Prod_Sel_List_Dialog::class.java, SEL_PROD, bundle)
                 }
                 SEL_PROD -> { // 查询生产订单 返回
                     val prodOrder = data!!.getSerializableExtra("obj") as ProdOrder_App
@@ -819,7 +844,8 @@ class Prod_InStock_Fragment2 : BaseFragment() {
                 barcode = getValues(et_positionCode)
             }
             '2' -> {
-                mUrl = getURL("prodOrder/findMtlIdByBarcode")
+//                mUrl = getURL("prodOrder/findMtlIdByBarcode")
+                mUrl = getURL("prodOrder/findBarcodeByCheck")
                 barcode = getValues(et_code)
             }
         }

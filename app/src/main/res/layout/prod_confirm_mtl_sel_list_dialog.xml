@@ -12,17 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_42dp"
         android:gravity="center"
-        android:text="选择生产订单"
+        android:text="确认扫码物料"
         android:background="#6691D7"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
-    <ykk.xc.com.glswms.util.xrecyclerview.XRecyclerView
-        android:id="@+id/xRecyclerView"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:overScrollMode="never" />
+        android:background="@color/white"
+        android:scrollbars="none" />
 
     <Button
         android:id="@+id/btn_close"

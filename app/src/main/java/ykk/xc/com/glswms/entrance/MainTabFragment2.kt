@@ -39,7 +39,7 @@ class MainTabFragment2 : BaseFragment() {
                 show(OutInStock_Search_MainActivity::class.java, bundle)
 //                show(Prod_Box_MainActivity::class.java, null)
             }
-            R.id.relative2 -> { // 半成品入库
+            R.id.relative2 -> { // 产品入库
                 show(Prod_InStock_MainActivity::class.java, null)
             }
             R.id.relative3  -> { // 成品入库
